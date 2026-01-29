@@ -53,74 +53,164 @@ public class Vinux {
                         //display task number, type, status and description
                         System.out.println("    " + (i + 1) + ".[" + taskType[i] + "]" + status + " " + tasks[i]);
                     }
-                } else if (input.startsWith("mark ")) { //when user marks a task as done
-                    //Level-3: mark a task as done
-                    //parseInt --> convert string (e.g. "2" to 2)
-                    //gives everything from position 5  (e.g. "mark 2" --> 2 is at position 5)
-                    int taskNumber = Integer.parseInt(input.substring(5)) - 1; //get task number
-                    isDone[taskNumber] = true; //set condition as true
-                    System.out.println("    Solid! This task is now done (FINALLY!):");
-                    System.out.println("        [X] " + tasks[taskNumber]);
-                } else if (input.startsWith("unmark ")) { //when user marks task as undone
-                    //Level-3: mark a task as undone
-                    //parseInt --> convert string (e.g. "2" to 2)
-                    //gives everything from position 7 (e.g. "unmark 2" --> 2 is at position 5)
-                    int taskNumber = Integer.parseInt(input.substring(7)) - 1;
-                    isDone[taskNumber] = false; //set condition as false
-                    System.out.println("    Aw man! This task is still not done:");
-                    System.out.println("        [ ] " + tasks[taskNumber]);
-                } else if (input.startsWith("todo")) {
-                    //Level-4: check if ToDo task (no date/time)
-                    String description = input.substring(5); //everything after "todo"
-                    tasks[taskCount] = description;
-                    taskType[taskCount] = "T";
-                    isDone[taskCount] = false; //task is undone yet
-                    taskCount++;
-                    System.out.println("    Gotcha. I have now added this task:");
-                    System.out.println("        [T][ ] " + description);
-                    System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+                } else if (input.startsWith("mark ")) { //Level-3: mark a task as done
+                    //Level-5: Error handling for mark command
+                    try {
+                        //parseInt --> convert string (e.g. "2" to 2)
+                        //gives everything from position 5  (e.g. "mark 2" --> 2 is at position 5)
+                        int taskNumber = Integer.parseInt(input.substring(5)) - 1; //get task number
 
-                } else if (input.startsWith("deadline")) {
-                    //Level-4: check if deadline task
-                    String details = input.substring(9); //everything after "deadline"
-                    //split the input by "/by" to separate descrption and deadline
-                    String[] parts = details.split(" /by "); //get the task
-                    String description = parts[0]; //get task name
-                    String by = parts[1]; //get deadline
-                    tasks[taskCount] = description + " (by: " + by + ")";
-                    taskType[taskCount] = "D";
-                    isDone[taskCount] = false;
-                    taskCount ++;
-                    System.out.println("    Gotcha. I have now added this task:");
-                    System.out.println("        [D][ ] " + description + " (by: " + by + ")");
-                    System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+                        //check if task number is valid
+                        if (taskNumber < 0 || taskNumber >= taskCount) {
+                            System.out.println("    Sleepy, much? Task number " + (taskNumber + 1) + " doesn't exist!");
+                            System.out.println("    You only have " + taskCount + " task(s) in the list.");
+                        } else { //normal case--> whne there are no errors
+                            isDone[taskNumber] = true; //set condition as true
+                            System.out.println("    Solid! This task is now done (FINALLY!):");
+                            System.out.println("        [X] " + tasks[taskNumber]);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("    Excuse me? Please provide a valid task number.");
+                        System.out.println("    Try this: mark 1");
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("    Excuse me? Tell me which task you want to mark clearly.");
+                        System.out.println("    Try this: mark 1");
+                    }
+                } else if (input.startsWith("unmark ")) { //Level-3: mark a task as undone
+                    //Level-5: Error handling for unmark command
+                    try {
+                        //parseInt --> convert string (e.g. "2" to 2)
+                        //gives everything from position 7 (e.g. "unmark 2" --> 2 is at position 5)
+                        int taskNumber = Integer.parseInt(input.substring(7)) - 1;
 
-                } else if (input.startsWith("event")) {
-                    //Level-4: check if event task
-                    String details = input.substring(6); //everything after "event"
-                    //split input by "/from" and "/to" to extract start and end time
-                    int fromIndex = details.indexOf(" /from "); //get the from time
-                    int toIndex = details.indexOf(" /to "); //get the to time
+                        //check if task number is valid
+                        if (taskNumber < 0 || taskNumber >= taskCount) {
+                            System.out.println("    Sleepy, much? Task number " + (taskNumber + 1) + " doesn't exist!");
+                            System.out.println("    You only have " + taskCount + " task(s) in the list.");
+                        } else {
+                            isDone[taskNumber] = false; //set condition as false
+                            System.out.println("    Aw man! This task is still not done:");
+                            System.out.println("        [ ] " + tasks[taskNumber]);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("    Excuse me? Please provide a valid task number.");
+                        System.out.println("    Try this: unmark 1");
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("    Excuse me? Tell me which task you want to mark clearly.");
+                        System.out.println("    Try this: unmark 1");
+                    }
+                } else if (input.startsWith("todo")) { //Level-4: check if ToDo task (no date/time)
+                    //Level-5: error handling for todo command
+                    if (input.trim().equals("todo") || input.substring(4).trim().isEmpty()) {
+                        //empty todo descriptiom
+                        System.out.println("    Wake up! You are giving me an empty task?");
+                        System.out.println("    Try this: todo buy apples");
+                    } else {
+                        String description = input.substring(5); //everything after "todo"
+                        tasks[taskCount] = description;
+                        taskType[taskCount] = "T";
+                        isDone[taskCount] = false; //task is undone yet
+                        taskCount++;
+                        System.out.println("    Gotcha. I have now added this task:");
+                        System.out.println("        [T][ ] " + description);
+                        System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+                    }
+                } else if (input.startsWith("deadline")) { //Level-4: check if deadline task
+                    //Level-5: error handling for deadline command
+                    if (input.trim().equals("deadline") || input.substring(8).trim().isEmpty()) {
+                        //empty deadline description
+                        System.out.println("    Wake up! When is the deadline??");
+                        System.out.println("    Try: deadline return book /by Sunday");
+                    } else {
+                        String details = input.substring(9); //everything after "deadline"
 
-                    String description = details.substring(0, fromIndex); //get task name
-                    String from = details.substring(fromIndex + 7, toIndex); //get 'from' date
-                    String to = details.substring(toIndex + 5); //get 'to' date
+                        //check if /by is present
+                        if (!details.contains(" /by ")) {
+                            System.out.println("    Uhm, I need to know the deadline.");
+                            System.out.println("    Format: deadline <task> /by <date>");
+                        } else {
+                            try {
+                                //split the input by "/by" to separate descrption and deadline
+                                String[] parts = details.split(" /by "); //get the task
 
-                    tasks[taskCount] = description + " (from: " + from + " to: " + to + ")";
-                    taskType[taskCount] = "E";
-                    isDone[taskCount] = false;
-                    taskCount ++;
-                    System.out.println("    Gotcha. I have now added this task:");
-                    System.out.println("    [E][ ] " + description + " (from: " + from + " to: " + to + ")");
-                    System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+                                if (parts[0].trim().isEmpty()) {
+                                    //if the description field is empty
+                                    System.out.println("    Excuse me? What task are you talking about?");
+                                } else if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                                    //if the deadline field is empty
+                                    System.out.println("    Excuse me? When is the deadline?");
+                                } else {
+                                    String description = parts[0]; //get task name
+                                    String by = parts[1]; //get deadline
+                                    tasks[taskCount] = description + " (by: " + by + ")";
+                                    taskType[taskCount] = "D";
+                                    isDone[taskCount] = false;
+                                    taskCount ++;
+                                    System.out.println("    Gotcha. I have now added this task:");
+                                    System.out.println("        [D][ ] " + description + " (by: " + by + ")");
+                                    System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+                                }
+                            } catch (Exception e) {
+                                System.out.println("    Wait...something went wrong with the deadline...");
+                                System.out.println("    Try: deadline return book /by Sunday");
+                            }
+                        }
+                    }
+                } else if (input.startsWith("event")) { //Level-4: check if event task
+                    //Level-5: error handling for event command
+                    if (input.trim().equals("event") || input.substring(5).trim().isEmpty()) {
+                        //empty event description
+                        System.out.println("    Wake up! What is the event even?");
+                        System.out.println("    Try: event meeting /from Mon 2pm /to 4pm");
+                    } else {
+                        String details = input.substring(6); //everything after "event"
 
-                //default: treat any other input as a simple task
+                        //check if /from and /to are present
+                        if (!details.contains(" /from ")) {
+                            System.out.println("    Excuse me? When does the event start?");
+                            System.out.println("    Format: event <task> /from <start> /to <end>");
+                        } else if (!details.contains(" /to ")) {
+                            System.out.println("    Excuse me? When does the event end?");
+                            System.out.println("    Format: event <task> /from <start> /to <end>");
+                        } else {
+                            try {
+                                //split input by "/from" and "/to" to extract start and end time
+                                int fromIndex = details.indexOf(" /from "); //get the from time
+                                int toIndex = details.indexOf(" /to "); //get the to time
+
+                                if (fromIndex >= toIndex) {
+                                    System.out.println("    Uhm...the /to must come after /from!");
+                                } else {
+                                    String description = details.substring(0, fromIndex); //get task name
+                                    String from = details.substring(fromIndex + 7, toIndex); //get 'from' date
+                                    String to = details.substring(toIndex + 5); //get 'to' date
+
+                                    if (description.trim().isEmpty()) {
+                                        System.out.println("    Wake up! What is the event even?");
+                                    } else if (from.trim().isEmpty()) {
+                                        System.out.println("    Excuse me? When does the event start?");
+                                    } else if (to.trim().isEmpty()) {
+                                        System.out.println("    Excuse me? When does the event end?");
+                                    } else {
+                                        tasks[taskCount] = description + " (from: " + from + " to: " + to + ")";
+                                        taskType[taskCount] = "E";
+                                        isDone[taskCount] = false;
+                                        taskCount ++;
+                                        System.out.println("    Gotcha. I have now added this task:");
+                                        System.out.println("    [E][ ] " + description + " (from: " + from + " to: " + to + ")");
+                                        System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+                                    }
+                                }
+                            } catch (Exception e) {
+                                System.out.println("    Wait...something went wrong with the event...");
+                                System.out.println("    Try: event meeting /from Mon 2pm /to 4pm");
+                            }
+                        }
+                    }
                 } else {
-                    //store the task in the array
-                    tasks[taskCount] = input;
-                    isDone[taskCount] = false; //new tasks start as not done
-                    taskCount ++;
-                    System.out.println("    added: " + input);
+                    //Level-5: Unknown command error
+                    System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("    Try: todo, deadline, event, list, mark, or unmark");
                 }
 
                 System.out.println("    ____________________________________________________________");
