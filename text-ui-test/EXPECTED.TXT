@@ -20,47 +20,41 @@ I'm listening, unfortunately. Go on.
     Now you have 1 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
-        [T][ ] return book
-    Now you have 2 task(s) in the list.
-    ____________________________________________________________
-    ____________________________________________________________
-    Why do you have so many things to do?
-    These are your tasks:
-    1.[T][ ] read book
-    2.[T][ ] return book
-    ____________________________________________________________
-    ____________________________________________________________
-    Solid! This task is now done (FINALLY!):
-        [X] read book
-    ____________________________________________________________
-    ____________________________________________________________
-    Why do you have so many things to do?
-    These are your tasks:
-    1.[T][X] read book
-    2.[T][ ] return book
-    ____________________________________________________________
-    ____________________________________________________________
-    Aw man! This task is still not done:
-        [ ] read book
+    Wake up! You are giving me an empty task?
+    Try this: todo buy apples
     ____________________________________________________________
     ____________________________________________________________
     Gotcha. I have now added this task:
         [D][ ] return book (by: Sunday)
-    Now you have 3 task(s) in the list.
+    Now you have 2 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Wake up! When is the deadline??
+    Try: deadline return book /by Sunday
     ____________________________________________________________
     ____________________________________________________________
     Gotcha. I have now added this task:
-    [E][ ] project meeting (from: Mon 2pm to: 4pm)
-    Now you have 4 task(s) in the list.
+    [E][ ] meeting (from: Mon 2pm to: 4pm)
+    Now you have 3 task(s) in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+    Wake up! What is the event even?
+    Try: event meeting /from Mon 2pm /to 4pm
+    ____________________________________________________________
+    ____________________________________________________________
+    OOPS!!! I'm sorry, but I don't know what that means :-(
+    Try: todo, deadline, event, list, mark, or unmark
+    ____________________________________________________________
+    ____________________________________________________________
+    Sleepy, much? Task number 999 doesn't exist!
+    You only have 3 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Why do you have so many things to do?
     These are your tasks:
     1.[T][ ] read book
-    2.[T][ ] return book
-    3.[D][ ] return book (by: Sunday)
-    4.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+    2.[D][ ] return book (by: Sunday)
+    3.[E][ ] meeting (from: Mon 2pm to: 4pm)
     ____________________________________________________________
 Bye. Try not to miss me too much ;)
 ||~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~||

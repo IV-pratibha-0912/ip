@@ -1,10 +1,10 @@
 todo read book
-todo return book
-list
-mark 1
-list
-unmark 1
+todo
 deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+deadline
+event meeting /from Mon 2pm /to 4pm
+event
+blah
+mark 999
 list
 bye
