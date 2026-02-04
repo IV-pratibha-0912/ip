@@ -1,3 +1,5 @@
+package vinux;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -69,36 +71,36 @@ public class Vinux {
 
         //initialize scanner to read user input
         Scanner scanner = new Scanner(System.in);
-        String input = ""; //stores user's command
+        String userCommand = ""; //stores user's command
 
         //main program loop: process commands until user types "bye"
-        while (!input.equals("bye")) {
-            input = scanner.nextLine();
+        while (!userCommand.equals("bye")) {
+            userCommand = scanner.nextLine();
 
             //process the command (unless it's "bye" which exits the loop)
-            if (!input.equals("bye")) {
+            if (!userCommand.equals("bye")) {
                 System.out.println("    ____________________________________________________________");
 
                 //handle different commands
-                if (input.equals("list")) {
+                if (userCommand.equals("list")) {
                     listAllTasks(tasks, isDone, taskTypes, taskCount);
-                } else if (input.startsWith("mark ")) {
-                    taskCount = handleMark(input, tasks, isDone, taskTypes, taskCount);
+                } else if (userCommand.startsWith("mark ")) {
+                    taskCount = handleMark(userCommand, tasks, isDone, taskTypes, taskCount);
                     saveTasks(tasks, isDone, taskTypes, taskCount); //Level-7: save after change
-                } else if (input.startsWith("unmark ")) {
-                    taskCount = handleUnmark(input, tasks, isDone, taskTypes, taskCount);
+                } else if (userCommand.startsWith("unmark ")) {
+                    taskCount = handleUnmark(userCommand, tasks, isDone, taskTypes, taskCount);
                     saveTasks(tasks, isDone, taskTypes, taskCount); //Level-7: save after change
-                } else if (input.startsWith("delete ")) {
-                    taskCount = handleDelete(input, tasks, isDone, taskTypes, taskCount);
+                } else if (userCommand.startsWith("delete ")) {
+                    taskCount = handleDelete(userCommand, tasks, isDone, taskTypes, taskCount);
                     saveTasks(tasks, isDone, taskTypes, taskCount); //Level-7: save after change
-                } else if (input.startsWith("todo")) {
-                    taskCount = handleTodo(input, tasks, isDone, taskTypes, taskCount);
+                } else if (userCommand.startsWith("todo")) {
+                    taskCount = handleTodo(userCommand, tasks, isDone, taskTypes, taskCount);
                     saveTasks(tasks, isDone, taskTypes, taskCount); //Level-7: save after change
-                } else if (input.startsWith("deadline")) {
-                    taskCount = handleDeadline(input, tasks, isDone, taskTypes, taskCount);
+                } else if (userCommand.startsWith("deadline")) {
+                    taskCount = handleDeadline(userCommand, tasks, isDone, taskTypes, taskCount);
                     saveTasks(tasks, isDone, taskTypes, taskCount); //Level-7: save after change
-                } else if (input.startsWith("event")) {
-                    taskCount = handleEvent(input, tasks, isDone, taskTypes, taskCount);
+                } else if (userCommand.startsWith("event")) {
+                    taskCount = handleEvent(userCommand, tasks, isDone, taskTypes, taskCount);
                     saveTasks(tasks, isDone, taskTypes, taskCount); //Level-7: save after change
                 } else {
                     //Level-5: handle unknown commands
@@ -143,8 +145,8 @@ public class Vinux {
             try {
                 dataFile.createNewFile();
                 return 0; //new file, no tasks to load
-            } catch (IOException e) {
-                System.out.println("    Error creating data file: " + e.getMessage());
+            } catch (IOException ioException) {
+                System.out.println("    Error creating data file: " + ioException.getMessage());
                 return 0;
             }
         }
@@ -180,8 +182,8 @@ public class Vinux {
                 }
             }
             fileScanner.close();
-        } catch (IOException e) {
-            System.out.println("    Error loading tasks: " + e.getMessage());
+        } catch (IOException ioException) {
+            System.out.println("    Error loading tasks: " + ioException.getMessage());
         }
 
         return count;
@@ -219,8 +221,8 @@ public class Vinux {
                 writer.write(typeWord + " " + statusSymbol + " " + tasks[i] + "\n");
             }
             writer.close();
-        } catch (IOException e) {
-            System.out.println("    Error saving tasks: " + e.getMessage());
+        } catch (IOException ioException) {
+            System.out.println("    Error saving tasks: " + ioException.getMessage());
         }
     }
 
@@ -285,18 +287,18 @@ public class Vinux {
      * Handles the 'mark' command to mark a task as done.
      * Level-5: Includes error handling for invalid input.
      *
-     * @param input User's command input
+     * @param userCommand User's command input
      * @param tasks Array of task descriptions
      * @param isDone Array of completion status
      * @param taskTypes Array of task types
      * @param taskCount Current number of tasks
      * @return Updated task count (unchanged for mark)
      */
-    private static int handleMark(String input, String[] tasks, boolean[] isDone,
+    private static int handleMark(String userCommand, String[] tasks, boolean[] isDone,
                                   TaskType[] taskTypes, int taskCount) {
         try {
             //extract task number from command (e.g., "mark 2" -> 2)
-            int taskNumber = Integer.parseInt(input.substring(5)) - 1; //convert to 0-indexed
+            int taskNumber = Integer.parseInt(userCommand.substring(5)) - 1; //convert to 0-indexed
 
             //validate task number
             if (taskNumber < 0 || taskNumber >= taskCount) {
@@ -309,11 +311,11 @@ public class Vinux {
                 System.out.println("    Solid! This task is now done (FINALLY!):");
                 System.out.println("        [X] " + tasks[taskNumber]);
             }
-        } catch (NumberFormatException e) {
-            //handle non-numeric input (e.g., "mark abc")
+        } catch (NumberFormatException formatException) {
+            //handle non-numeric userCommand (e.g., "mark abc")
             System.out.println("    Excuse me? Please provide a valid task number.");
             System.out.println("    Try this: mark 1");
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException indexException) {
             //handle missing task number (e.g., just "mark")
             System.out.println("    Excuse me? Tell me which task you want to mark clearly.");
             System.out.println("    Try this: mark 1");
@@ -325,18 +327,18 @@ public class Vinux {
      * Handles the 'unmark' command to mark a task as not done.
      * Level-5: Includes error handling for invalid input.
      *
-     * @param input User's command input
+     * @param userCommand User's command input
      * @param tasks Array of task descriptions
      * @param isDone Array of completion status
      * @param taskTypes Array of task types
      * @param taskCount Current number of tasks
      * @return Updated task count (unchanged for unmark)
      */
-    private static int handleUnmark(String input, String[] tasks, boolean[] isDone,
+    private static int handleUnmark(String userCommand, String[] tasks, boolean[] isDone,
                                     TaskType[] taskTypes, int taskCount) {
         try {
             //extract task number from command
-            int taskNumber = Integer.parseInt(input.substring(7)) - 1;
+            int taskNumber = Integer.parseInt(userCommand.substring(7)) - 1;
 
             //validate task number
             if (taskNumber < 0 || taskNumber >= taskCount) {
@@ -349,10 +351,10 @@ public class Vinux {
                 System.out.println("    Aw man! This task is still not done:");
                 System.out.println("        [ ] " + tasks[taskNumber]);
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException formatException) {
             System.out.println("    Excuse me? Please provide a valid task number.");
             System.out.println("    Try this: unmark 1");
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException indexException) {
             System.out.println("    Excuse me? Tell me which task you want to mark clearly.");
             System.out.println("    Try this: unmark 1");
         }
@@ -363,18 +365,18 @@ public class Vinux {
      * Handles the 'delete' command to remove a task.
      * Level-6: Deletes task and shifts remaining tasks.
      *
-     * @param input User's command input
+     * @param userCommand User's command input
      * @param tasks Array of task descriptions
      * @param isDone Array of completion status
      * @param taskTypes Array of task types
      * @param taskCount Current number of tasks
      * @return Updated task count after deletion
      */
-    private static int handleDelete(String input, String[] tasks, boolean[] isDone,
+    private static int handleDelete(String userCommand, String[] tasks, boolean[] isDone,
                                     TaskType[] taskTypes, int taskCount) {
         try {
             //extract task number from command
-            int taskNumber = Integer.parseInt(input.substring(7)) - 1;
+            int taskNumber = Integer.parseInt(userCommand.substring(7)) - 1;
 
             //validate task number
             if (taskNumber < 0 || taskNumber >= taskCount) {
@@ -402,10 +404,10 @@ public class Vinux {
                         + deletedTask);
                 System.out.println("    Now you have " + taskCount + " task(s) in the list.");
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException formatException) {
             System.out.println("    Excuse me? Please provide a valid task number.");
             System.out.println("    Try this: delete 1");
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException indexException) {
             System.out.println("    Excuse me? Tell me which task you want to delete clearly.");
             System.out.println("    Try this: delete 1");
         }
@@ -417,22 +419,22 @@ public class Vinux {
      * Level-4: Creates a task without any date/time.
      * Level-5: Includes error handling for empty descriptions.
      *
-     * @param input User's command input
+     * @param userCommand User's command input
      * @param tasks Array of task descriptions
      * @param isDone Array of completion status
      * @param taskTypes Array of task types
      * @param taskCount Current number of tasks
      * @return Updated task count after addition
      */
-    private static int handleTodo(String input, String[] tasks, boolean[] isDone,
+    private static int handleTodo(String userCommand, String[] tasks, boolean[] isDone,
                                   TaskType[] taskTypes, int taskCount) {
         //Level-5: check for empty description
-        if (input.trim().equals("todo") || input.substring(4).trim().isEmpty()) {
+        if (userCommand.trim().equals("todo") || userCommand.substring(4).trim().isEmpty()) {
             System.out.println("    Wake up! You are giving me an empty task?");
             System.out.println("    Try this: todo buy apples");
         } else {
             //extract task description (everything after "todo ")
-            String description = input.substring(5);
+            String description = userCommand.substring(5);
 
             //add task to arrays
             tasks[taskCount] = description;
@@ -453,21 +455,21 @@ public class Vinux {
      * Level-4: Creates a task with a deadline date/time.
      * Level-5: Includes error handling for missing or invalid parts.
      *
-     * @param input User's command input
+     * @param userCommand User's command input
      * @param tasks Array of task descriptions
      * @param isDone Array of completion status
      * @param taskTypes Array of task types
      * @param taskCount Current number of tasks
      * @return Updated task count after addition
      */
-    private static int handleDeadline(String input, String[] tasks, boolean[] isDone,
+    private static int handleDeadline(String userCommand, String[] tasks, boolean[] isDone,
                                       TaskType[] taskTypes, int taskCount) {
         //Level-5: check for empty description
-        if (input.trim().equals("deadline") || input.substring(8).trim().isEmpty()) {
+        if (userCommand.trim().equals("deadline") || userCommand.substring(8).trim().isEmpty()) {
             System.out.println("    Wake up! When is the deadline??");
             System.out.println("    Try: deadline return book /by Sunday");
         } else {
-            String details = input.substring(9); //everything after "deadline "
+            String details = userCommand.substring(9); //everything after "deadline "
 
             //Level-5: check if "/by" is present
             if (!details.contains(" /by ")) {
@@ -499,7 +501,7 @@ public class Vinux {
                         System.out.println("    Now you have " + taskCount
                                 + " task(s) in the list.");
                     }
-                } catch (Exception e) {
+                } catch (Exception generalException) {
                     System.out.println("    Wait...something went wrong with the deadline...");
                     System.out.println("    Try: deadline return book /by Sunday");
                 }
@@ -513,21 +515,21 @@ public class Vinux {
      * Level-4: Creates a task with start and end times.
      * Level-5: Includes error handling for missing or invalid parts.
      *
-     * @param input User's command input
+     * @param userCommand User's command input
      * @param tasks Array of task descriptions
      * @param isDone Array of completion status
      * @param taskTypes Array of task types
      * @param taskCount Current number of tasks
      * @return Updated task count after addition
      */
-    private static int handleEvent(String input, String[] tasks, boolean[] isDone,
+    private static int handleEvent(String userCommand, String[] tasks, boolean[] isDone,
                                    TaskType[] taskTypes, int taskCount) {
         //Level-5: check for empty description
-        if (input.trim().equals("event") || input.substring(5).trim().isEmpty()) {
+        if (userCommand.trim().equals("event") || userCommand.substring(5).trim().isEmpty()) {
             System.out.println("    Wake up! What is the event even?");
             System.out.println("    Try: event meeting /from Mon 2pm /to 4pm");
         } else {
-            String details = input.substring(6); //everything after "event "
+            String details = userCommand.substring(6); //everything after "event "
 
             //Level-5: check if "/from" is present
             if (!details.contains(" /from ")) {
@@ -574,7 +576,7 @@ public class Vinux {
                                     + " task(s) in the list.");
                         }
                     }
-                } catch (Exception e) {
+                } catch (Exception generalException) {
                     System.out.println("    Wait...something went wrong with the event...");
                     System.out.println("    Try: event meeting /from Mon 2pm /to 4pm");
                 }

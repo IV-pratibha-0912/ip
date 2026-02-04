@@ -2,7 +2,7 @@
 chcp 65001 > nul
 
 echo ===============================================
-echo                Duke Test Runner                
+echo                Duke Test Runner
 echo ===============================================
 echo.
 
@@ -36,6 +36,12 @@ if not exist ..\bin (
     echo Created bin directory
 )
 
+REM Clean up previous test data file
+if exist ..\data\vinux.txt (
+    del ..\data\vinux.txt
+    echo Cleaned up previous test data
+)
+
 if exist ACTUAL.TXT (
     del ACTUAL.TXT
     echo Cleaned up previous test outputs
@@ -43,11 +49,11 @@ if exist ACTUAL.TXT (
 
 echo.
 echo [3/4] Compiling source files...
-javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\Vinux.java
+javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\vinux\Vinux.java
 IF ERRORLEVEL 1 (
     echo.
     echo =============== ERROR ===============
-    echo         BUILD FAILURE              
+    echo         BUILD FAILURE
     echo ===================================
     exit /b 1
 )
@@ -56,19 +62,25 @@ echo [√] Compilation successful
 echo.
 
 echo [4/4] Running tests...
-java -classpath ..\bin Vinux < input.txt > ACTUAL.TXT
+java -classpath ..\bin vinux.Vinux < input.txt > ACTUAL.TXT
 
 FC ACTUAL.TXT EXPECTED.TXT > nul
 if ERRORLEVEL 1 (
     echo.
     echo =============== ERROR ===============
-    echo           Tests FAILED             
+    echo           Tests FAILED
     echo ===================================
+    echo.
+    echo Run this to see differences:
+    echo FC ACTUAL.TXT EXPECTED.TXT
+    echo.
+    echo To accept current output as correct:
+    echo copy ACTUAL.TXT EXPECTED.TXT
     exit /b 1
 ) else (
     echo.
     echo ============= SUCCESS ==============
-    echo         All tests passed           
+    echo         All tests passed
     echo ===================================
     exit /b 0
 )
