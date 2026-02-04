@@ -3,11 +3,15 @@ package vinux;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
  * Vinux is a Personal Assistant Chatbot that helps manage tasks.
  * It supports todos, deadlines, and events with save/load functionality.
+ * Level-8: Now with proper date/time handling using LocalDate.
  */
 public class Vinux {
     /**
@@ -39,6 +43,17 @@ public class Vinux {
     private static final String DATA_FILE_PATH = "./data/vinux.txt";
     private static final int MAX_TASKS = 100;
 
+    //Level-8: Date formatters for parsing and displaying dates
+    private static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
+
+    /**
+     * Main entry point of the Vinux chatbot.
+     * Initializes the chatbot, loads saved tasks, processes user commands and saves tasks before exiting.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         //ASCII art logo of the chatbox: VINUX
         String logo = "              ________   __\n"
@@ -265,6 +280,31 @@ public class Vinux {
     }
 
     /**
+     * Parses a date string in yyyy-MM-dd format to LocalDate.
+     * Level-8: Proper date parsing with error handling.
+     * @param dateString The date string to parse
+     * @return LocalDate object if parsing succeeds, null otherwise.
+     */
+    private static LocalDate parseDate(String dateString) {
+        try {
+            return LocalDate.parse(dateString, INPUT_DATE_FORMAT); //converts strings like "2019-12-31"
+        } catch (DateTimeParseException parseException) {
+            return null; //if parsing fails
+        }
+    }
+
+    /**
+     * Formats a LocalDate to a string that is readable by humans
+     * Level-8: Display dates in MMM dd yyyy format
+     *
+     * @param date the LocalDate to format
+     * @return Formatted date string
+     */
+    private static String formatDate(LocalDate date) {
+        return date.format(OUTPUT_DATE_FORMAT); //converts 'LocalDate' to nice format
+    }
+
+    /**
      * Displays all tasks in the task list.
      *
      * @param tasks Array of task descriptions
@@ -464,49 +504,73 @@ public class Vinux {
      */
     private static int handleDeadline(String userCommand, String[] tasks, boolean[] isDone,
                                       TaskType[] taskTypes, int taskCount) {
-        //Level-5: check for empty description
-        if (userCommand.trim().equals("deadline") || userCommand.substring(8).trim().isEmpty()) {
+        //Level-5: check if command is just "deadline" with nothing after
+        if (userCommand.trim().equals("deadline")) {
             System.out.println("    Wake up! When is the deadline??");
-            System.out.println("    Try: deadline return book /by Sunday");
-        } else {
-            String details = userCommand.substring(9); //everything after "deadline "
-
-            //Level-5: check if "/by" is present
-            if (!details.contains(" /by ")) {
-                System.out.println("    Uhm, I need to know the deadline.");
-                System.out.println("    Format: deadline <task> /by <date>");
-            } else {
-                try {
-                    //split by "/by" to separate description and deadline
-                    String[] parts = details.split(" /by ");
-
-                    //Level-5: validate parts
-                    if (parts[0].trim().isEmpty()) {
-                        System.out.println("    Excuse me? What task are you talking about?");
-                    } else if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                        System.out.println("    Excuse me? When is the deadline?");
-                    } else {
-                        String description = parts[0];
-                        String by = parts[1];
-
-                        //add task with deadline info in the format: "return book by June 6th"
-                        tasks[taskCount] = description + " by " + by;
-                        taskTypes[taskCount] = TaskType.DEADLINE;
-                        isDone[taskCount] = false;
-                        taskCount++;
-
-                        //display confirmation
-                        System.out.println("    Gotcha. I have now added this task:");
-                        System.out.println("        [D][ ] " + description + " (by: " + by + ")");
-                        System.out.println("    Now you have " + taskCount
-                                + " task(s) in the list.");
-                    }
-                } catch (Exception generalException) {
-                    System.out.println("    Wait...something went wrong with the deadline...");
-                    System.out.println("    Try: deadline return book /by Sunday");
-                }
-            }
+            System.out.println("    Try: deadline return book /by 2019-12-31");
+            return taskCount;
         }
+
+        String details = userCommand.substring(9); //everything after "deadline "
+
+        //Level-8: Check if "/by" is present (with or without space before it)
+        int byIndex = details.indexOf("/by");
+        if (byIndex == -1) {
+            //No /by at all
+            System.out.println("    Uhm, I need to know the deadline.");
+            System.out.println("    Format: deadline <task> /by <date>");
+            System.out.println("    Date format: yyyy-MM-dd (e.g., 2019-12-31)");
+            return taskCount;
+        }
+
+        try {
+            //Extract description (everything before /by)
+            String description = details.substring(0, byIndex).trim();
+
+            //Extract date (everything after "/by ")
+            String dateString = "";
+            if (byIndex + 3 < details.length()) {
+                dateString = details.substring(byIndex + 3).trim(); //skip "/by"
+            }
+
+            //Level-5: validate each part separately
+            if (description.isEmpty()) {
+                System.out.println("    Excuse me? What task are you talking about?");
+                return taskCount;
+            }
+
+            if (dateString.isEmpty()) {
+                System.out.println("    Excuse me? When is the deadline?");
+                return taskCount;
+            }
+
+            //Level-8: Parse the date using LocalDate
+            LocalDate deadlineDate = parseDate(dateString);
+
+            if (deadlineDate == null) {
+                //date parsing failed
+                System.out.println("    Wait!!! That does NOT look like a valid date...");
+                System.out.println("    Use this format: yyyy-MM-dd (e.g., 2019-12-31)");
+                return taskCount;
+            }
+
+            //All validations passed: add the task
+            String formattedDate = formatDate(deadlineDate);
+            tasks[taskCount] = description + " by " + dateString;
+            taskTypes[taskCount] = TaskType.DEADLINE;
+            isDone[taskCount] = false;
+            taskCount++;
+
+            //display confirmation
+            System.out.println("    Gotcha. I have now added this task:");
+            System.out.println("        [D][ ] " + description + " (by: " + formattedDate + ")");
+            System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+
+        } catch (Exception generalException) {
+            System.out.println("    Wait...something went wrong with the deadline...");
+            System.out.println("    Try: deadline return book /by 2019-12-31");
+        }
+
         return taskCount;
     }
 
