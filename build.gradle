@@ -31,10 +31,18 @@ application {
     mainClass.set("vinux.Vinux")
 }
 
+
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "vinux"
     archiveClassifier = null
+
+    manifest {
+        attributes(
+                'Main-Class': application.mainClass.get()
+        )
+    }
 }
+
 
 run{
     standardInput = System.in
