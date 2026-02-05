@@ -83,6 +83,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + getTypeIcon() + "][" + getStatusIcon() + "]" + description;
+        return "[" + getTypeIcon() + "][" + getStatusIcon() + "] " + description;
     }
 }
