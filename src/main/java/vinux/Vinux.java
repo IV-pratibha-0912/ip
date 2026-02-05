@@ -67,6 +67,10 @@ public class Vinux {
                     case "event":
                         handleEvent(fullCommand);
                         break;
+                    case "find":
+                        handleFind(fullCommand);
+                        break;
+
                     default:
                         ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                                 + "    Try: todo, deadline, event, list, mark, unmark, or delete");
@@ -198,6 +202,19 @@ public class Vinux {
         ui.showTaskAdded(task, tasks.getSize());
         storage.saveTasks(tasks);
     }
+
+    /**
+     * Handles the find command.
+     *
+     * @param fullCommand The full command string
+     * @throws VinuxException if command parsing fails
+     */
+    private void handleFind(String fullCommand) throws VinuxException {
+        String keyword = Parser.parseFindCommand(fullCommand);
+        String result = tasks.findTasks(keyword);
+        System.out.println(result);
+    }
+
 
     /**
      * Main entry point of the Vinux application.
