@@ -8,6 +8,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test class for {@link Ui}.
+ *
+ * <p>Tests user interface outputs and formatting.</p>
+ */
 public class UiTest {
 
     private Ui ui;

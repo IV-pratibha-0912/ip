@@ -14,6 +14,9 @@ public class TaskTest {
         assertFalse(todo.isDone());
     }
 
+    /**
+     * Tests that marking a task as done changes its status correctly.
+     */
     @Test
     public void testMarkAsDone() {
         Todo task = new Todo("return book");

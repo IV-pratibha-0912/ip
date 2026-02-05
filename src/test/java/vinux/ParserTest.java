@@ -10,6 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test class for {@link Parser}.
+ *
+ * <p>This class contains unit tests for Parser methods to ensure correct
+ * parsing of user commands and input strings.</p>
+ */
 public class ParserTest {
 
     @Test

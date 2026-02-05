@@ -5,6 +5,11 @@ import org.junit.jupiter.api.AfterEach;
 import java.io.File;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Test class for {@link Vinux}.
+ *
+ * <p>Tests main application behavior and command handling.</p>
+ */
 public class VinuxTest {
 
     @AfterEach

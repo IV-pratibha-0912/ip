@@ -4,6 +4,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test class for {@link Event}.
+ *
+ * <p>Tests the behavior of Event tasks, including date/time formatting and
+ * completion status.</p>
+ */
 public class EventTest {
 
     @Test

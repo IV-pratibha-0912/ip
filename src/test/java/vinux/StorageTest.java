@@ -9,6 +9,11 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test class for {@link Storage}.
+ *
+ * <p>Tests file reading and writing operations for the Vinux application.</p>
+ */
 public class StorageTest {
 
     private Storage storage;

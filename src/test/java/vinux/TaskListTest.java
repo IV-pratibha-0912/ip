@@ -9,6 +9,12 @@ import vinux.task.Deadline;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Test class for {@link TaskList}.
+ *
+ * <p>Tests the management of a list of tasks, including adding, deleting,
+ * and marking tasks.</p>
+ */
 public class TaskListTest {
 
     private TaskList taskList;

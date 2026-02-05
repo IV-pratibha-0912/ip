@@ -4,6 +4,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test class for {@link Todo}.
+ *
+ * <p>Tests the behavior of Todo tasks, including string representation
+ * and marking tasks as done.</p>
+ */
 public class TodoTest {
 
     @Test
