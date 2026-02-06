@@ -143,6 +143,14 @@ public class Ui {
     }
 
     /**
+     * Shows message (A-Cheer)
+     * @param message
+     */
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
+
+    /**
      * Closes the scanner.
      */
     public void close() {

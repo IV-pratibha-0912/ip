@@ -2,6 +2,9 @@ package vinux;
 
 import vinux.task.Task;
 
+import java.util.List;
+import java.util.Random;
+
 /**
  * Vinux is a Personal Assistant Chatbot that helps manage tasks.
  * Level-8: Now with proper date/time handling using LocalDate.
@@ -67,9 +70,12 @@ public class Vinux {
                     case "event":
                         handleEvent(fullCommand);
                         break;
+                    case "cheer": //A-Cheer
+                        handleCheer();
+                        break;
                     default:
                         ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                                + "    Try: todo, deadline, event, list, mark, unmark, or delete");
+                                + "    Try: todo, deadline, event, list, mark, unmark, or delete, or cheer");
                 }
 
                 ui.showLine();
@@ -198,6 +204,23 @@ public class Vinux {
         ui.showTaskAdded(task, tasks.getSize());
         storage.saveTasks(tasks);
     }
+
+    private void handleCheer() {
+        try {
+            List<String> quotes = storage.loadCheerQuotes();
+            if (quotes.isEmpty()) {
+                ui.showMessage("No quotes found!");
+                return;
+            }
+            Random rand = new Random();
+            String quote = quotes.get(rand.nextInt(quotes.size()));
+            ui.showMessage(quote);
+        } catch (VinuxException e) {
+            ui.showError("Oops! Could not load cheer quotes: " + e.getMessage());
+        }
+    }
+
+
 
     /**
      * Main entry point of the Vinux application.
