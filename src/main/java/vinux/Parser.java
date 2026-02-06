@@ -158,4 +158,19 @@ public class Parser {
             throw new VinuxException("Excuse me? Tell me which task clearly.");
         }
     }
+
+    /**
+     * Parses the find command and returns the keyword.
+     *
+     * @param fullCommand The full command string
+     * @return The keyword to search for
+     * @throws VinuxException if no keyword is provided
+     */
+    public static String parseFindCommand(String fullCommand) throws VinuxException {
+        String[] parts = fullCommand.split(" ", 2);
+        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+            throw new VinuxException("☹ OOPS!!! The keyword for find cannot be empty.");
+        }
+        return parts[1].trim();
+    }
 }
