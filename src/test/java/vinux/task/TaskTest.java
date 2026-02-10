@@ -1,10 +1,16 @@
 package vinux.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * Test class for {@link Task}.
+ *
+ * <p>Tests core task behavior including marking, status icons, and descriptions.</p>
+ */
 public class TaskTest {
 
     @Test

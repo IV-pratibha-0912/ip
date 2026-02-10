@@ -1,10 +1,5 @@
 package vinux;
 
-import vinux.task.Task;
-import vinux.task.Todo;
-import vinux.task.Deadline;
-import vinux.task.Event;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,8 +9,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
+
+import vinux.task.Deadline;
+import vinux.task.Event;
+import vinux.task.Task;
+import vinux.task.Todo;
 
 /**
  * Handles loading and saving tasks to/from the file system.
@@ -189,23 +188,17 @@ public class Storage {
         }
     }
 
-    // A-Cheer: Load cheer quotes
+    /**
+     * Loads cheer quotes from the cheer.txt file.
+     *
+     * @return List of cheer quotes
+     * @throws VinuxException if the file cannot be read
+     */
     public List<String> loadCheerQuotes() throws VinuxException {
         try {
             return Files.readAllLines(Paths.get("./data/cheer.txt"));
-        } catch (IOException e) {
-            throw new VinuxException("Failed to load cheer quotes: " + e.getMessage());
+        } catch (IOException ioException) {
+            throw new VinuxException("Failed to load cheer quotes: " + ioException.getMessage());
         }
     }
-
-    public String getRandomCheer() throws VinuxException {
-        List<String> quotes = loadCheerQuotes();
-        if (quotes.isEmpty()) {
-            throw new VinuxException("No cheer quotes found in cheer.txt!");
-        }
-        Random rand = new Random();
-        return quotes.get(rand.nextInt(quotes.size()));
-    }
-
 }
-

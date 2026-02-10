@@ -1,7 +1,8 @@
 package vinux;
 
-import vinux.task.Task;
 import java.util.ArrayList;
+
+import vinux.task.Task;
 
 /**
  * Represents a list of tasks.
@@ -93,7 +94,6 @@ public class TaskList {
 
         return sb.toString();
     }
-
 
     /**
      * Returns the ArrayList of all tasks.

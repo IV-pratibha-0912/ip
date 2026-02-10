@@ -1,13 +1,13 @@
 package vinux;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import vinux.task.Todo;
-import vinux.task.Task;
-import java.time.LocalDate;
-import vinux.task.Deadline;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import vinux.task.Task;
+import vinux.task.Todo;
 
 /**
  * Test class for {@link TaskList}.
