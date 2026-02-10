@@ -8,9 +8,10 @@ import java.time.format.DateTimeFormatter;
  * Level-8: Uses LocalDate for proper date handling.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
     private static final DateTimeFormatter OUTPUT_FORMAT =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
+
+    protected LocalDate by;
 
     /**
      * Constructs a Deadline task with the given description and due date.

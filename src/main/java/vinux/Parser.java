@@ -1,13 +1,13 @@
 package vinux;
 
-import vinux.task.Task;
-import vinux.task.Todo;
-import vinux.task.Deadline;
-import vinux.task.Event;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import vinux.task.Deadline;
+import vinux.task.Event;
+import vinux.task.Task;
+import vinux.task.Todo;
 
 /**
  * Parses user input and creates appropriate Task objects.
@@ -169,7 +169,7 @@ public class Parser {
     public static String parseFindCommand(String fullCommand) throws VinuxException {
         String[] parts = fullCommand.split(" ", 2);
         if (parts.length < 2 || parts[1].trim().isEmpty()) {
-            throw new VinuxException("☹ OOPS!!! The keyword for find cannot be empty.");
+            throw new VinuxException("OOPS!!! The keyword for find cannot be empty.");
         }
         return parts[1].trim();
     }

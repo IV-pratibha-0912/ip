@@ -1,16 +1,18 @@
 package vinux;
 
-import vinux.task.Task;
 import java.util.Scanner;
+
+import vinux.task.Task;
 
 /**
  * Handles interactions with the user.
  * Displays messages and reads user input.
  */
 public class Ui {
-    private Scanner scanner;
     private static final String LINE = "    ____________________________________________________________";
     private static final String DOUBLE_LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+    private Scanner scanner;
 
     /**
      * Constructs a Ui object and initializes the scanner.
@@ -143,8 +145,9 @@ public class Ui {
     }
 
     /**
-     * Shows message (A-Cheer)
-     * @param message
+     * Displays a general message to the user.
+     *
+     * @param message The message to display
      */
     public void showMessage(String message) {
         System.out.println(message);

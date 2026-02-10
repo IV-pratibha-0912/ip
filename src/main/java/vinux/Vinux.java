@@ -1,9 +1,9 @@
 package vinux;
 
-import vinux.task.Task;
-
 import java.util.List;
 import java.util.Random;
+
+import vinux.task.Task;
 
 /**
  * Vinux is a Personal Assistant Chatbot that helps manage tasks.
@@ -70,16 +70,15 @@ public class Vinux {
                     case "event":
                         handleEvent(fullCommand);
                         break;
-                    case "cheer": //A-Cheer
-                        handleCheer();
-                        break;
                     case "find":
                         handleFind(fullCommand);
                         break;
-
+                    case "cheer":
+                        handleCheer();
+                        break;
                     default:
                         ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                                + "    Try: todo, deadline, event, list, mark, unmark, or delete, or cheer");
+                                + "    Try: todo, deadline, event, list, mark, unmark, delete, or find");
                 }
 
                 ui.showLine();
@@ -211,6 +210,7 @@ public class Vinux {
 
     /**
      * Handles the find command.
+     * Searches for tasks matching the keyword.
      *
      * @param fullCommand The full command string
      * @throws VinuxException if command parsing fails
@@ -221,7 +221,10 @@ public class Vinux {
         System.out.println(result);
     }
 
-
+    /**
+     * Handles the cheer command.
+     * Displays a random cheer quote to motivate the user.
+     */
     private void handleCheer() {
         try {
             List<String> quotes = storage.loadCheerQuotes();
@@ -232,12 +235,10 @@ public class Vinux {
             Random rand = new Random();
             String quote = quotes.get(rand.nextInt(quotes.size()));
             ui.showMessage(quote);
-        } catch (VinuxException e) {
-            ui.showError("Oops! Could not load cheer quotes: " + e.getMessage());
+        } catch (VinuxException vinuxException) {
+            ui.showError("Oops! Could not load cheer quotes: " + vinuxException.getMessage());
         }
     }
-
-
 
     /**
      * Main entry point of the Vinux application.

@@ -1,14 +1,15 @@
 package vinux;
 
-import org.junit.jupiter.api.Test;
-import vinux.task.Task;
-import vinux.task.Todo;
-import vinux.task.Deadline;
-import vinux.task.Event;
-import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import vinux.task.Deadline;
+import vinux.task.Event;
+import vinux.task.Task;
+import vinux.task.Todo;
 
 /**
  * Test class for {@link Parser}.

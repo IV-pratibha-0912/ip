@@ -1,4 +1,5 @@
 plugins {
+    id 'checkstyle'
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
@@ -43,6 +44,9 @@ shadowJar {
     }
 }
 
+checkstyle {
+    toolVersion = '11.0.0'
+}
 
 run{
     standardInput = System.in
