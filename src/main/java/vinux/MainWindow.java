@@ -1,5 +1,8 @@
 package vinux;
 
+import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -40,14 +43,19 @@ public class MainWindow extends AnchorPane {
     public void setVinux(Vinux v) {
         vinux = v;
 
-        // Show logo at the top
-        ImageView logo = new ImageView(logoImage);
-        logo.setFitWidth(200);
-        logo.setPreserveRatio(true);
+        if (logoImage != null) {
+            ImageView logo = new ImageView(logoImage);
+            logo.setFitWidth(350);
+            logo.setPreserveRatio(true);
 
-        // Show welcome message below logo
-        dialogContainer.getChildren().addAll(
-                logo,
+            // Centre the logo
+            HBox logoContainer = new HBox(logo);
+            logoContainer.setAlignment(Pos.CENTER);
+
+            dialogContainer.getChildren().add(logoContainer);
+        }
+
+        dialogContainer.getChildren().add(
                 DialogBox.getVinuxDialog(vinux.getWelcomeMessage(), vinuxImage)
         );
     }

@@ -1,9 +1,9 @@
 .label {
-    -fx-text-fill: #e0e0e0;
+    -fx-text-fill: #2c2c2c;
     -fx-font-family: "Georgia";
     -fx-font-size: 13px;
-    -fx-background-color: #16213e;
-    -fx-border-color: #e94560;
+    -fx-background-color: #e8d5f5;
+    -fx-border-color: #b39ddb;
     -fx-border-width: 1px;
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
@@ -11,8 +11,58 @@
 }
 
 .reply-label {
-    -fx-background-color: #0f3460;
-    -fx-border-color: #a8dadc;
+    -fx-background-color: #ffd6e0;
+    -fx-border-color: #f48fb1;
+    -fx-text-fill: #2c2c2c;
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;
+}
+
+.error-label {
+    -fx-background-color: #fc6a03;
+    -fx-border-color: #e65100;
+    -fx-border-width: 2px;
+    -fx-text-fill: #000435;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
+}
+
+.timestamp-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: #2c2c2c;
+    -fx-font-family: "Georgia";
+    -fx-padding: 0 5 0 5;
+}
+
+.todo-label {
+    -fx-background-color: #fff9c4;
+    -fx-border-color: #f9a825;
+    -fx-text-fill: #2c2c2c;
+}
+
+.deadline-label {
+    -fx-background-color: #ffcdd2;
+    -fx-border-color: #e57373;
+    -fx-text-fill: #2c2c2c;
+}
+
+.event-label {
+    -fx-background-color: #b3e5fc;
+    -fx-border-color: #4fc3f7;
+    -fx-text-fill: #2c2c2c;
+}
+
+.mark-label {
+    -fx-background-color: #c8e6c9;
+    -fx-border-color: #66bb6a;
+    -fx-text-fill: #2c2c2c;
+}
+
+
+.cheer-label {
+    -fx-background-color: #fdfd96;
+    -fx-border-color: #ffa500;
+    -fx-text-fill: #2c2c2c;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
 }

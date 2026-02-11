@@ -93,8 +93,8 @@ public class Ui {
      * @param tasks The TaskList to display
      */
     public void showTaskList(TaskList tasks) {
-        System.out.println("    Why do you have so many things to do?");
-        System.out.println("    These are your tasks:");
+        System.out.println("Why do you have so many things to do?");
+        System.out.println("These are your tasks:");
         for (int i = 0; i < tasks.getSize(); i++) {
             System.out.println("    " + (i + 1) + "." + tasks.getTask(i));
         }
@@ -107,9 +107,9 @@ public class Ui {
      * @param taskCount The total number of tasks
      */
     public void showTaskAdded(Task task, int taskCount) {
-        System.out.println("    Gotcha. I have now added this task:");
+        System.out.println("Gotcha. I have now added this task:");
         System.out.println("      " + task);
-        System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+        System.out.println("Now you have " + taskCount + " task(s) in the list.");
     }
 
     /**
@@ -118,7 +118,7 @@ public class Ui {
      * @param task The task that was marked
      */
     public void showTaskMarked(Task task) {
-        System.out.println("    Solid! This task is now done (FINALLY!):");
+        System.out.println("Solid! This task is now done (FINALLY!):");
         System.out.println("        [X] " + task.getDescription());
     }
 
@@ -128,7 +128,7 @@ public class Ui {
      * @param task The task that was unmarked
      */
     public void showTaskUnmarked(Task task) {
-        System.out.println("    Aw man! This task is still not done:");
+        System.out.println("Aw man! This task is still not done:");
         System.out.println("        [ ] " + task.getDescription());
     }
 
@@ -139,9 +139,9 @@ public class Ui {
      * @param taskCount The remaining number of tasks
      */
     public void showTaskDeleted(Task task, int taskCount) {
-        System.out.println("    You sure? I've removed this task:");
+        System.out.println("You sure? I've removed this task:");
         System.out.println("    " + task);
-        System.out.println("    Now you have " + taskCount + " task(s) in the list.");
+        System.out.println("Now you have " + taskCount + " task(s) in the list.");
     }
 
     /**

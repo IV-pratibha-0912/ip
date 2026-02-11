@@ -77,8 +77,8 @@ public class Vinux {
                         handleCheer();
                         break;
                     default:
-                        ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                                + "    Try: todo, deadline, event, list, mark, unmark, delete, or find");
+                        ui.showError("OOPS!!! I'm sorry, but I don't know what that means...\n"
+                                + "Try: todo, deadline, event, list, mark, unmark, delete, or find");
                 }
 
                 ui.showLine();
@@ -114,7 +114,7 @@ public class Vinux {
         if (index < 0 || index >= tasks.getSize()) {
             throw new VinuxException("Sleepy, much? Task number " + (index + 1)
                     + " doesn't exist!\n"
-                    + "    You only have " + tasks.getSize() + " task(s) in the list.");
+                    + "You only have " + tasks.getSize() + " task(s) in the list.");
         }
 
         Task task = tasks.getTask(index);
@@ -136,7 +136,7 @@ public class Vinux {
         if (index < 0 || index >= tasks.getSize()) {
             throw new VinuxException("Sleepy, much? Task number " + (index + 1)
                     + " doesn't exist!\n"
-                    + "    You only have " + tasks.getSize() + " task(s) in the list.");
+                    + "You only have " + tasks.getSize() + " task(s) in the list.");
         }
 
         Task task = tasks.getTask(index);
@@ -158,7 +158,7 @@ public class Vinux {
         if (index < 0 || index >= tasks.getSize()) {
             throw new VinuxException("Sleepy, much? Task number " + (index + 1)
                     + " doesn't exist!\n"
-                    + "    You only have " + tasks.getSize() + " task(s) in the list.");
+                    + "You only have " + tasks.getSize() + " task(s) in the list.");
         }
 
         Task deletedTask = tasks.deleteTask(index);
@@ -271,11 +271,11 @@ public class Vinux {
                 case "cheer":
                     return getCheerResponse();
                 default:
-                    return "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    return "ERROR: I'm sorry, but I don't know what that means...\n"
                             + "Try: todo, deadline, event, list, mark, unmark, delete, or find";
             }
         } catch (VinuxException vinuxException) {
-            return vinuxException.getMessage();
+            return "ERROR: " + vinuxException.getMessage();
         }
     }
 
@@ -372,7 +372,7 @@ public class Vinux {
                 return "No quotes found!";
             }
             Random rand = new Random();
-            return quotes.get(rand.nextInt(quotes.size()));
+            return "CHEER: " + quotes.get(rand.nextInt(quotes.size()));
         } catch (VinuxException vinuxException) {
             return "Oops! Could not load cheer quotes: " + vinuxException.getMessage();
         }

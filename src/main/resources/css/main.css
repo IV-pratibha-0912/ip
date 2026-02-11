@@ -1,31 +1,33 @@
 .root {
-    -fx-background-color: #1a1a2e;
+    -fx-background-color: #1a0a0a;
     -fx-font-family: "Georgia";
 }
 
 .text-field {
-    -fx-background-color: #16213e;
-    -fx-text-fill: #e0e0e0;
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: #ffffff;
     -fx-font-family: "Georgia";
     -fx-font-size: 14px;
-    -fx-border-color: #e94560;
+    -fx-border-color: #b39ddb;
     -fx-border-width: 1px;
 }
 
 .button {
-    -fx-background-color: #e94560;
-    -fx-text-fill: white;
+    -fx-background-color: #b39ddb;
+    -fx-text-fill: #2c2c2c;
     -fx-font-family: "Georgia";
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
 
 .button:hover {
-    -fx-background-color: #c73652;
+    -fx-background-color: #9c7bb5;
+    -fx-text-fill: white;
 }
 
 .button:pressed {
-    -fx-background-color: #ff6b6b;
+    -fx-background-color: #7b52ab;
+    -fx-text-fill: white;
 }
 
 .scroll-pane,
@@ -34,11 +36,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: #16213e;
+    -fx-background-color: #8b1a1a;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #e94560;
+    -fx-background-color: #d4a0a0;
     -fx-background-radius: 1em;
 }
 

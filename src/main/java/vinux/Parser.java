@@ -37,7 +37,7 @@ public class Parser {
     public static Task parseTodoCommand(String fullCommand) throws VinuxException {
         if (fullCommand.trim().equals("todo") || fullCommand.substring(4).trim().isEmpty()) {
             throw new VinuxException("Wake up! You are giving me an empty task?\n"
-                    + "    Try this: todo buy apples");
+                    + "Try this: todo buy apples");
         }
 
         String description = fullCommand.substring(5);
@@ -55,7 +55,7 @@ public class Parser {
     public static Task parseDeadlineCommand(String fullCommand) throws VinuxException {
         if (fullCommand.trim().equals("deadline")) {
             throw new VinuxException("Wake up! When is the deadline??\n"
-                    + "    Try: deadline return book /by 2019-12-31");
+                    + "Try: deadline return book /by 2019-12-31");
         }
 
         String details = fullCommand.substring(9);
@@ -63,8 +63,8 @@ public class Parser {
 
         if (byIndex == -1) {
             throw new VinuxException("Uhm, I need to know the deadline.\n"
-                    + "    Format: deadline <task> /by <date>\n"
-                    + "    Date format: yyyy-MM-dd (e.g., 2019-12-31)");
+                    + "Format: deadline <task> /by <date>\n"
+                    + "Date format: yyyy-MM-dd (e.g., 2019-12-31)");
         }
 
         String description = details.substring(0, byIndex).trim();
@@ -86,7 +86,7 @@ public class Parser {
             return new Deadline(description, date);
         } catch (DateTimeParseException parseException) {
             throw new VinuxException("Wait!!! That does NOT look like a valid date...\n"
-                    + "    Use this format: yyyy-MM-dd (e.g., 2019-12-31)");
+                    + "Use this format: yyyy-MM-dd (e.g., 2019-12-31)");
         }
     }
 
@@ -100,41 +100,55 @@ public class Parser {
     public static Task parseEventCommand(String fullCommand) throws VinuxException {
         if (fullCommand.trim().equals("event") || fullCommand.substring(5).trim().isEmpty()) {
             throw new VinuxException("Wake up! What is the event even?\n"
-                    + "    Try: event meeting /from Mon 2pm /to 4pm");
+                    + "Try: event meeting /from Mon 2pm /to 4pm");
         }
 
         String details = fullCommand.substring(6);
 
-        if (!details.contains(" /from ")) {
-            throw new VinuxException("Excuse me? When does the event start?\n"
-                    + "    Format: event <task> /from <start> /to <end>");
-        }
-
-        if (!details.contains(" /to ")) {
-            throw new VinuxException("Excuse me? When does the event end?\n"
-                    + "    Format: event <task> /from <start> /to <end>");
+        // Check if description exists BEFORE looking for /from and /to
+        // If details starts with /from or /to, there is no description
+        if (details.trim().startsWith("/from") || details.trim().startsWith("/to")) {
+            throw new VinuxException("Wake up! What is the event even?\n"
+                    + "Format: event <task> /from <start> /to <end>");
         }
 
         int fromIndex = details.indexOf(" /from ");
         int toIndex = details.indexOf(" /to ");
 
+        if (fromIndex == -1 && toIndex == -1) {
+            throw new VinuxException("Wake up! What is the event even?\n"
+                    + "Format: event <task> /from <start> /to <end>");
+        }
+
+        if (fromIndex == -1) {
+            throw new VinuxException("Excuse me? When does the event start?\n"
+                    + "Format: event <task> /from <start> /to <end>");
+        }
+
+        if (toIndex == -1) {
+            throw new VinuxException("Excuse me? When does the event end?\n"
+                    + "Format: event <task> /from <start> /to <end>");
+        }
+
+        String description = details.substring(0, fromIndex).trim();
+
+        if (description.isEmpty()) {
+            throw new VinuxException("Wake up! What is the event even?\n"
+                    + "Format: event <task> /from <start> /to <end>");
+        }
+
         if (fromIndex >= toIndex) {
             throw new VinuxException("Uhm...the /to must come after /from!");
         }
 
-        String description = details.substring(0, fromIndex);
-        String from = details.substring(fromIndex + 7, toIndex);
-        String to = details.substring(toIndex + 5);
+        String from = details.substring(fromIndex + 7, toIndex).trim();
+        String to = details.substring(toIndex + 5).trim();
 
-        if (description.trim().isEmpty()) {
-            throw new VinuxException("Wake up! What is the event even?");
-        }
-
-        if (from.trim().isEmpty()) {
+        if (from.isEmpty()) {
             throw new VinuxException("Excuse me? When does the event start?");
         }
 
-        if (to.trim().isEmpty()) {
+        if (to.isEmpty()) {
             throw new VinuxException("Excuse me? When does the event end?");
         }
 
