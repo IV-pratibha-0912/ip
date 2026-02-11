@@ -1,3 +1,6 @@
 TODO ✗ read book
-DEADLINE ✗ return book by 2025-06-06
+DEADLINE ✓ return book by 2025-06-06
 EVENT ✗ meeting from Mon 2pm to 4pm
+TODO ✓ buy apples
+DEADLINE ✗ homework by 2026-02-13
+EVENT ✗ meeting from 2pm to 4pm

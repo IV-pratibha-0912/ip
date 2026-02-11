@@ -1,7 +1,7 @@
 plugins {
-    id 'checkstyle'
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
@@ -9,45 +9,25 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
-}
-
-test {
-    useJUnitPlatform()
-
-    testLogging {
-        events "passed", "skipped", "failed"
-
-        showExceptions true
-        exceptionFormat "full"
-        showCauses true
-        showStackTraces true
-        showStandardStreams = false
-    }
+javafx {
+    version = '21.0.1'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
 }
 
 application {
-    mainClass.set("vinux.Vinux")
+    mainClass.set("vinux.Launcher")
 }
-
 
 shadowJar {
     archiveBaseName = "vinux"
     archiveClassifier = null
-
-    manifest {
-        attributes(
-                'Main-Class': application.mainClass.get()
-        )
-    }
 }
 
-checkstyle {
-    toolVersion = '11.0.0'
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
-run{
-    standardInput = System.in
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
