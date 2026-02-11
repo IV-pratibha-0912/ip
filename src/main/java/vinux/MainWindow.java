@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -27,6 +28,8 @@ public class MainWindow extends AnchorPane {
             this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image vinuxImage = new Image(
             this.getClass().getResourceAsStream("/images/DaVinux.png"));
+    private Image logoImage = new Image(
+            this.getClass().getResourceAsStream("/images/VinuxLogo.png"));
 
     @FXML
     public void initialize() {
@@ -36,7 +39,15 @@ public class MainWindow extends AnchorPane {
     /** Injects the Vinux instance and shows welcome message. */
     public void setVinux(Vinux v) {
         vinux = v;
-        dialogContainer.getChildren().add(
+
+        // Show logo at the top
+        ImageView logo = new ImageView(logoImage);
+        logo.setFitWidth(200);
+        logo.setPreserveRatio(true);
+
+        // Show welcome message below logo
+        dialogContainer.getChildren().addAll(
+                logo,
                 DialogBox.getVinuxDialog(vinux.getWelcomeMessage(), vinuxImage)
         );
     }

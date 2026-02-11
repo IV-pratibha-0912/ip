@@ -4,3 +4,4 @@ EVENT ✗ meeting from Mon 2pm to 4pm
 TODO ✓ buy apples
 DEADLINE ✗ homework by 2026-02-13
 EVENT ✗ meeting from 2pm to 4pm
+EVENT ✗ meeting from 2pm to 6pm

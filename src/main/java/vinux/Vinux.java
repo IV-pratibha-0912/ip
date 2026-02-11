@@ -285,7 +285,7 @@ public class Vinux {
      * @return Welcome message string
      */
     public String getWelcomeMessage() {
-        return "Hello! I am your favourite assistant Vinux.\nI'm listening, unfortunately. Go on.";
+        return "Hello! I am your favourite assistant Vinux.\nI'm listening, unfortunately. Go on.\n";
     }
 
     private String getListResponse() {
