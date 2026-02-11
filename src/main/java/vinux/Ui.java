@@ -107,9 +107,11 @@ public class Ui {
      * @param taskCount The total number of tasks
      */
     public void showTaskAdded(Task task, int taskCount) {
-        System.out.println("Gotcha. I have now added this task:");
-        System.out.println("      " + task);
-        System.out.println("Now you have " + taskCount + " task(s) in the list.");
+        showMessages(
+                "Gotcha. I have now added this task:",
+                "      " + task,
+                "Now you have " + taskCount + " task(s) in the list."
+        );
     }
 
     /**
@@ -118,8 +120,10 @@ public class Ui {
      * @param task The task that was marked
      */
     public void showTaskMarked(Task task) {
-        System.out.println("Solid! This task is now done (FINALLY!):");
-        System.out.println("        [X] " + task.getDescription());
+        showMessages(
+                "Solid! This task is now done (FINALLY!):",
+                "        [X] " + task.getDescription()
+        );
     }
 
     /**
@@ -128,8 +132,10 @@ public class Ui {
      * @param task The task that was unmarked
      */
     public void showTaskUnmarked(Task task) {
-        System.out.println("Aw man! This task is still not done:");
-        System.out.println("        [ ] " + task.getDescription());
+        showMessages(
+                "Aw man! This task is still not done:",
+                "        [ ] " + task.getDescription()
+        );
     }
 
     /**
@@ -139,9 +145,11 @@ public class Ui {
      * @param taskCount The remaining number of tasks
      */
     public void showTaskDeleted(Task task, int taskCount) {
-        System.out.println("You sure? I've removed this task:");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + taskCount + " task(s) in the list.");
+        showMessages(
+                "You sure? I've removed this task:",
+                "    " + task,
+                "Now you have " + taskCount + " task(s) in the list."
+        );
     }
 
     /**
@@ -151,6 +159,17 @@ public class Ui {
      */
     public void showMessage(String message) {
         System.out.println(message);
+    }
+
+    /**
+     * Displays multiple messages using varargs.
+     *
+     * @param messages The messages to display
+     */
+    public void showMessages(String... messages) {
+        for (String message : messages) {
+            System.out.println(message);
+        }
     }
 
     /**

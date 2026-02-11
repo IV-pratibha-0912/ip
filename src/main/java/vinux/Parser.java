@@ -36,8 +36,10 @@ public class Parser {
      */
     public static Task parseTodoCommand(String fullCommand) throws VinuxException {
         if (fullCommand.trim().equals("todo") || fullCommand.substring(4).trim().isEmpty()) {
-            throw new VinuxException("Wake up! You are giving me an empty task?\n"
-                    + "Try this: todo buy apples");
+            throw new VinuxException(
+                    "Wake up! You are giving me an empty task?",
+                    "Try this: todo buy apples"
+            );
         }
 
         String description = fullCommand.substring(5);
@@ -54,17 +56,21 @@ public class Parser {
      */
     public static Task parseDeadlineCommand(String fullCommand) throws VinuxException {
         if (fullCommand.trim().equals("deadline")) {
-            throw new VinuxException("Wake up! When is the deadline??\n"
-                    + "Try: deadline return book /by 2019-12-31");
+            throw new VinuxException(
+                    "Wake up! When is the deadline??",
+                    "Try: deadline return book /by 2019-12-31"
+            );
         }
 
         String details = fullCommand.substring(9);
         int byIndex = details.indexOf("/by");
 
         if (byIndex == -1) {
-            throw new VinuxException("Uhm, I need to know the deadline.\n"
-                    + "Format: deadline <task> /by <date>\n"
-                    + "Date format: yyyy-MM-dd (e.g., 2019-12-31)");
+            throw new VinuxException(
+                    "Uhm, I need to know the deadline.",
+                    "Format: deadline <task> /by <date>",
+                    "Date format: yyyy-MM-dd (e.g., 2019-12-31)"
+            );
         }
 
         String description = details.substring(0, byIndex).trim();
@@ -85,8 +91,10 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateString, INPUT_DATE_FORMAT);
             return new Deadline(description, date);
         } catch (DateTimeParseException parseException) {
-            throw new VinuxException("Wait!!! That does NOT look like a valid date...\n"
-                    + "Use this format: yyyy-MM-dd (e.g., 2019-12-31)");
+            throw new VinuxException(
+                    "Wait!!! That does NOT look like a valid date...",
+                    "Use this format: yyyy-MM-dd (e.g., 2019-12-31)"
+            );
         }
     }
 
@@ -99,8 +107,10 @@ public class Parser {
      */
     public static Task parseEventCommand(String fullCommand) throws VinuxException {
         if (fullCommand.trim().equals("event") || fullCommand.substring(5).trim().isEmpty()) {
-            throw new VinuxException("Wake up! What is the event even?\n"
-                    + "Try: event meeting /from Mon 2pm /to 4pm");
+            throw new VinuxException(
+                    "Wake up! What is the event even?",
+                    "Format: event <task> /from <start> /to <end>"
+            );
         }
 
         String details = fullCommand.substring(6);
@@ -121,13 +131,17 @@ public class Parser {
         }
 
         if (fromIndex == -1) {
-            throw new VinuxException("Excuse me? When does the event start?\n"
-                    + "Format: event <task> /from <start> /to <end>");
+            throw new VinuxException(
+                    "Excuse me? When does the event start?",
+                    "Format: event <task> /from <start> /to <end>"
+            );
         }
 
         if (toIndex == -1) {
-            throw new VinuxException("Excuse me? When does the event end?\n"
-                    + "Format: event <task> /from <start> /to <end>");
+            throw new VinuxException(
+                    "Excuse me? When does the event end?",
+                    "Format: event <task> /from <start> /to <end>"
+            );
         }
 
         String description = details.substring(0, fromIndex).trim();

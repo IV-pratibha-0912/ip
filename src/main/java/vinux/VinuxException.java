@@ -14,4 +14,14 @@ public class VinuxException extends Exception {
     public VinuxException(String message) {
         super(message);
     }
+
+    /**
+     * Constructs a VinuxException from multiple message lines using varargs.
+     * Lines are joined with newline characters.
+     *
+     * @param lines The lines of the error message
+     */
+    public VinuxException(String... lines) {
+        super(String.join("\n", lines));
+    }
 }
