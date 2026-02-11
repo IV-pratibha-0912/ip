@@ -1,0 +1,18 @@
+.label {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 13px;
+    -fx-background-color: #16213e;
+    -fx-border-color: #e94560;
+    -fx-border-width: 1px;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
+    -fx-padding: 8px;
+}
+
+.reply-label {
+    -fx-background-color: #0f3460;
+    -fx-border-color: #a8dadc;
+    -fx-background-radius: 1em 1em 1em 0;
+    -fx-border-radius: 1em 1em 1em 0;
+}

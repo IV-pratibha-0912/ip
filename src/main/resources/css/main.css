@@ -1,0 +1,49 @@
+.root {
+    -fx-background-color: #1a1a2e;
+    -fx-font-family: "Georgia";
+}
+
+.text-field {
+    -fx-background-color: #16213e;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    -fx-border-color: #e94560;
+    -fx-border-width: 1px;
+}
+
+.button {
+    -fx-background-color: #e94560;
+    -fx-text-fill: white;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #c73652;
+}
+
+.button:pressed {
+    -fx-background-color: #ff6b6b;
+}
+
+.scroll-pane,
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: #16213e;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #e94560;
+    -fx-background-radius: 1em;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
