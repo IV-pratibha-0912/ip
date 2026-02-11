@@ -241,6 +241,144 @@ public class Vinux {
     }
 
     /**
+     * Generates a response for the user's input for the GUI.
+     *
+     * @param input The user's input string
+     * @return The response string to display
+     */
+    public String getResponse(String input) {
+        try {
+            String commandWord = Parser.getCommandWord(input);
+            switch (commandWord) {
+                case "bye":
+                    return "Bye. Try not to miss me too much ;)";
+                case "list":
+                    return getListResponse();
+                case "mark":
+                    return getMarkResponse(input);
+                case "unmark":
+                    return getUnmarkResponse(input);
+                case "delete":
+                    return getDeleteResponse(input);
+                case "todo":
+                    return getTodoResponse(input);
+                case "deadline":
+                    return getDeadlineResponse(input);
+                case "event":
+                    return getEventResponse(input);
+                case "find":
+                    return getFindResponse(input);
+                case "cheer":
+                    return getCheerResponse();
+                default:
+                    return "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                            + "Try: todo, deadline, event, list, mark, unmark, delete, or find";
+            }
+        } catch (VinuxException vinuxException) {
+            return vinuxException.getMessage();
+        }
+    }
+
+    /**
+     * Returns the welcome message for display in the GUI.
+     *
+     * @return Welcome message string
+     */
+    public String getWelcomeMessage() {
+        return "Hello! I am your favourite assistant Vinux.\nI'm listening, unfortunately. Go on.";
+    }
+
+    private String getListResponse() {
+        if (tasks.getSize() == 0) {
+            return "You have no tasks! Lucky you.";
+        }
+        StringBuilder sb = new StringBuilder("Why do you have so many things to do?\n");
+        sb.append("These are your tasks:\n");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            sb.append(i + 1).append(".").append(tasks.getTask(i)).append("\n");
+        }
+        return sb.toString().trim();
+    }
+
+    private String getMarkResponse(String input) throws VinuxException {
+        int index = Parser.parseTaskIndex(input, 5);
+        if (index < 0 || index >= tasks.getSize()) {
+            throw new VinuxException("Sleepy, much? Task number " + (index + 1)
+                    + " doesn't exist!\nYou only have " + tasks.getSize() + " task(s).");
+        }
+        tasks.getTask(index).markAsDone();
+        storage.saveTasks(tasks);
+        return "Solid! This task is now done (FINALLY!):\n    [X] "
+                + tasks.getTask(index).getDescription();
+    }
+
+    private String getUnmarkResponse(String input) throws VinuxException {
+        int index = Parser.parseTaskIndex(input, 7);
+        if (index < 0 || index >= tasks.getSize()) {
+            throw new VinuxException("Sleepy, much? Task number " + (index + 1)
+                    + " doesn't exist!\nYou only have " + tasks.getSize() + " task(s).");
+        }
+        tasks.getTask(index).markAsNotDone();
+        storage.saveTasks(tasks);
+        return "Aw man! This task is still not done:\n    [ ] "
+                + tasks.getTask(index).getDescription();
+    }
+
+    private String getDeleteResponse(String input) throws VinuxException {
+        int index = Parser.parseTaskIndex(input, 7);
+        if (index < 0 || index >= tasks.getSize()) {
+            throw new VinuxException("Sleepy, much? Task number " + (index + 1)
+                    + " doesn't exist!\nYou only have " + tasks.getSize() + " task(s).");
+        }
+        Task deletedTask = tasks.deleteTask(index);
+        storage.saveTasks(tasks);
+        return "You sure? I've removed this task:\n" + deletedTask
+                + "\nNow you have " + tasks.getSize() + " task(s) in the list.";
+    }
+
+    private String getTodoResponse(String input) throws VinuxException {
+        Task task = Parser.parseTodoCommand(input);
+        tasks.addTask(task);
+        storage.saveTasks(tasks);
+        return "Gotcha. I have now added this task:\n  " + task
+                + "\nNow you have " + tasks.getSize() + " task(s) in the list.";
+    }
+
+    private String getDeadlineResponse(String input) throws VinuxException {
+        Task task = Parser.parseDeadlineCommand(input);
+        tasks.addTask(task);
+        storage.saveTasks(tasks);
+        return "Gotcha. I have now added this task:\n  " + task
+                + "\nNow you have " + tasks.getSize() + " task(s) in the list.";
+    }
+
+    private String getEventResponse(String input) throws VinuxException {
+        Task task = Parser.parseEventCommand(input);
+        tasks.addTask(task);
+        storage.saveTasks(tasks);
+        return "Gotcha. I have now added this task:\n  " + task
+                + "\nNow you have " + tasks.getSize() + " task(s) in the list.";
+    }
+
+    private String getFindResponse(String input) throws VinuxException {
+        String keyword = Parser.parseFindCommand(input);
+        return tasks.findTasks(keyword);
+    }
+
+    private String getCheerResponse() {
+        try {
+            List<String> quotes = storage.loadCheerQuotes();
+            if (quotes.isEmpty()) {
+                return "No quotes found!";
+            }
+            Random rand = new Random();
+            return quotes.get(rand.nextInt(quotes.size()));
+        } catch (VinuxException vinuxException) {
+            return "Oops! Could not load cheer quotes: " + vinuxException.getMessage();
+        }
+    }
+
+    /**
      * Main entry point of the Vinux application.
      *
      * @param args Command line arguments (not used)
