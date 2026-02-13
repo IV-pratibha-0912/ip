@@ -76,6 +76,9 @@ public class Vinux {
                     case "cheer":
                         handleCheer();
                         break;
+                    case "clear":
+                        handleClear();
+                        break;
                     default:
                         ui.showError("OOPS!!! I'm sorry, but I don't know what that means...\n"
                                 + "Try: todo, deadline, event, list, mark, unmark, delete, or find");
@@ -241,6 +244,22 @@ public class Vinux {
     }
 
     /**
+     * Handles the clear command.
+     * Removes all tasks from the list.
+     *
+     * @throws VinuxException if saving fails
+     */
+    private void handleClear() throws VinuxException {
+        int count = tasks.getSize();
+        tasks.clearTasks();
+        storage.saveTasks(tasks);
+        ui.showMessages(
+                "Consider it done! I've cleared all " + count + " task(s).",
+                "Your list is now empty. You're welcome."
+        );
+    }
+
+    /**
      * Generates a response for the user's input for the GUI.
      *
      * @param input The user's input string
@@ -270,6 +289,8 @@ public class Vinux {
                     return getFindResponse(input);
                 case "cheer":
                     return getCheerResponse();
+                case "clear":
+                    return getClearResponse();
                 default:
                     return "ERROR: I'm sorry, but I don't know what that means...\n"
                             + "Try: todo, deadline, event, list, mark, unmark, delete, or find";
@@ -376,6 +397,19 @@ public class Vinux {
         } catch (VinuxException vinuxException) {
             return "Oops! Could not load cheer quotes: " + vinuxException.getMessage();
         }
+    }
+
+    private boolean awaitingClearConfirmation = false;
+
+    private String getClearResponse() throws VinuxException {
+        if (tasks.getSize() == 0) {
+            return "Your list is already empty! Nothing to clear.";
+        }
+        int count = tasks.getSize();
+        tasks.clearTasks();
+        storage.saveTasks(tasks);
+        return "Consider it done! I've cleared all " + count
+                + " task(s) from your list.\nYour list is now empty. You're welcome.";
     }
 
     /**

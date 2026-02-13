@@ -66,3 +66,12 @@
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
 }
+
+.clear-label {
+    -fx-background-color: #e8d5f5;
+    -fx-border-color: #9c27b0;
+    -fx-border-width: 2px;
+    -fx-text-fill: #4a0072;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
+}

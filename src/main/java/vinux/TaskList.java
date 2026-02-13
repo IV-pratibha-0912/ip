@@ -96,6 +96,14 @@ public class TaskList {
     }
 
     /**
+     * Clears all tasks from the list
+     */
+    public void clearTasks () {
+        tasks.clear();
+    }
+
+
+    /**
      * Returns the ArrayList of all tasks.
      *
      * @return The list of all tasks
