@@ -73,31 +73,37 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks whose descriptions contain the given keyword.
+     * Finds tasks whose descriptions contain the given keyword using streams.
      *
      * @param keyword The keyword to search for
      * @return A formatted string of matching tasks
      */
     public String findTasks(String keyword) {
+        assert keyword != null : "Keyword should not be null";
+
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
 
-        int index = 1;
-        boolean foundAny = false;
+        long matchCount = tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase()
+                        .contains(keyword.toLowerCase()))
+                .count();
 
-        for (Task task : tasks) {
-            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                sb.append(index).append(".").append(task).append("\n");
-                foundAny = true;
-            }
-            index++;
+        if (matchCount == 0) {
+            return "No matching tasks found.";
         }
 
-        if (!foundAny) {
-            sb.append("No matching tasks found.");
-        }
+        // Build numbered list of matching tasks using streams
+        int[] index = {1};
+        tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase()
+                        .contains(keyword.toLowerCase()))
+                .forEach(task -> {
+                    sb.append(index[0]).append(".").append(task).append("\n");
+                    index[0]++;
+                });
 
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     /**
@@ -109,11 +115,40 @@ public class TaskList {
 
 
     /**
-     * Returns the ArrayList of all tasks.
+     * Returns all tasks as an unmodifiable list using streams.
      *
      * @return The list of all tasks
      */
     public ArrayList<Task> getAllTasks() {
-        return tasks;
+        return tasks.stream().collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Returns a summary of tasks by type using streams.
+     *
+     * @return A formatted string showing task type counts
+     */
+    public String getTaskSummary() {
+        long todoCount = tasks.stream()
+                .filter(task -> task.getTypeIcon().equals("T"))
+                .count();
+
+        long deadlineCount = tasks.stream()
+                .filter(task -> task.getTypeIcon().equals("D"))
+                .count();
+
+        long eventCount = tasks.stream()
+                .filter(task -> task.getTypeIcon().equals("E"))
+                .count();
+
+        long doneCount = tasks.stream()
+                .filter(Task::isDone)
+                .count();
+
+        return "Task summary:\n"
+                + "  Todos: " + todoCount + "\n"
+                + "  Deadlines: " + deadlineCount + "\n"
+                + "  Events: " + eventCount + "\n"
+                + "  Completed: " + doneCount + "/" + tasks.size();
     }
 }

@@ -322,11 +322,13 @@ public class Vinux {
         if (tasks.getSize() == 0) {
             return "You have no tasks! Lucky you.";
         }
-        StringBuilder sb = new StringBuilder("Why do you have so many things to do?\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Why do you have so many things to do?\n");
         sb.append("These are your tasks:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
             sb.append(i + 1).append(".").append(tasks.getTask(i)).append("\n");
         }
+        sb.append("\n").append(tasks.getTaskSummary());
         return sb.toString().trim();
     }
 
