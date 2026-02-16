@@ -300,9 +300,11 @@ public class Vinux {
                 return getCheerResponse();
             case "clear":
                 return getClearResponse();
+            case "help":
+                return getHelpResponse();
             default:
                 return "ERROR: I'm sorry, but I don't know what that means...\n"
-                        + "Try: todo, deadline, event, list, mark, unmark, delete, or find";
+                        + "Type 'help' to see all available commands!";
             }
         } catch (VinuxException vinuxException) {
             return "ERROR: " + vinuxException.getMessage();
@@ -424,6 +426,27 @@ public class Vinux {
         storage.saveTasks(tasks);
         return "Consider it done! I've cleared all " + count
                 + " task(s) from your list.\nYour list is now empty. You're welcome.";
+    }
+
+    /**
+     * Returns a help message listing all available commands and their formats.
+     *
+     * @return A formatted string containing all available commands
+     */
+    private String getHelpResponse() {
+        return "Here are the commands I understand:\n"
+                + "  todo <task>                          - Add a todo\n"
+                + "  deadline <task> /by <yyyy-MM-dd>     - Add a deadline\n"
+                + "  event <task> /from <start> /to <end> - Add an event\n"
+                + "  list                                 - List all tasks\n"
+                + "  mark <index>                         - Mark task done\n"
+                + "  unmark <index>                       - Unmark task\n"
+                + "  delete <index>                       - Delete task\n"
+                + "  find <keyword>                       - Search tasks\n"
+                + "  clear                                - Clear all tasks\n"
+                + "  cheer                                - Get motivation\n"
+                + "  help                                 - Show this list\n"
+                + "  bye                                  - Exit Vinux";
     }
 
     /**

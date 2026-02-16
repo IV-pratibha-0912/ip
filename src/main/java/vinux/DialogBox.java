@@ -84,6 +84,8 @@ public class DialogBox extends HBox {
             applyErrorStyle(text.substring(6).trim());
         } else if (lower.startsWith("consider it done!")) {
             dialog.getStyleClass().add("clear-label");
+        } else if (lower.startsWith("here are the commands")) {
+            dialog.getStyleClass().add("help-label");
         }
     }
 

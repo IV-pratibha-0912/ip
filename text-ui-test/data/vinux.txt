@@ -1,16 +1,6 @@
-TODO ✓ read book
-TODO ✗ return book
-DEADLINE ✗ submit assignment by Friday
-EVENT ✗ meeting from Mon 2pm to 4pm
 TODO ✗ read book
-TODO ✗ return book
-DEADLINE ✗ submit assignment by Friday
-EVENT ✗ meeting from Mon 2pm to 4pm
-TODO ✗ read book
-TODO ✗ return book
-DEADLINE ✗ submit assignment by Friday
-EVENT ✗ meeting from Mon 2pm to 4pm
-TODO ✗ read book
-TODO ✗ return book
-DEADLINE ✗ submit assignment by Friday
-EVENT ✗ meeting from Mon 2pm to 4pm
+DEADLINE ✓ submit assignment by 2019-12-31
+DEADLINE ✗ return book by 2025-12-15
+DEADLINE ✗ project report by 2019-10-15
+EVENT ✗ project meeting from Mon 2pm to 4pm
+EVENT ✗ team lunch from 12pm to 1pm
