@@ -24,6 +24,8 @@ public class Parser {
      * @return The command word (first word of the command)
      */
     public static String getCommandWord(String fullCommand) {
+        assert fullCommand != null : "Command should not be null";
+        assert !fullCommand.isEmpty() : "Command should not be empty";
         return fullCommand.split(" ")[0];
     }
 
@@ -35,6 +37,9 @@ public class Parser {
      * @throws VinuxException if the command format is invalid
      */
     public static Task parseTodoCommand(String fullCommand) throws VinuxException {
+        assert fullCommand != null : "Command should not be null";
+        assert fullCommand.startsWith("todo") : "Command should start with todo";
+
         if (fullCommand.trim().equals("todo") || fullCommand.substring(4).trim().isEmpty()) {
             throw new VinuxException(
                     "Wake up! You are giving me an empty task?",
@@ -43,6 +48,7 @@ public class Parser {
         }
 
         String description = fullCommand.substring(5);
+        assert !description.trim().isEmpty() : "Description should not be empty after parsing";
         return new Todo(description);
     }
 
@@ -55,6 +61,9 @@ public class Parser {
      * @throws VinuxException if the command format is invalid
      */
     public static Task parseDeadlineCommand(String fullCommand) throws VinuxException {
+        assert fullCommand != null : "Command should not be null";
+        assert fullCommand.startsWith("deadline") : "Command should start with deadline";
+
         if (fullCommand.trim().equals("deadline")) {
             throw new VinuxException(
                     "Wake up! When is the deadline??",
@@ -106,6 +115,9 @@ public class Parser {
      * @throws VinuxException if the command format is invalid
      */
     public static Task parseEventCommand(String fullCommand) throws VinuxException {
+        assert fullCommand != null : "Command should not be null";
+        assert fullCommand.startsWith("event") : "Command should start with event";
+
         if (fullCommand.trim().equals("event") || fullCommand.substring(5).trim().isEmpty()) {
             throw new VinuxException(
                     "Wake up! What is the event even?",
@@ -178,6 +190,9 @@ public class Parser {
      * @throws VinuxException if the index is invalid
      */
     public static int parseTaskIndex(String fullCommand, int commandLength) throws VinuxException {
+        assert fullCommand != null : "Command should not be null";
+        assert commandLength > 0 : "Command length should be positive";
+
         try {
             return Integer.parseInt(fullCommand.substring(commandLength)) - 1;
         } catch (NumberFormatException formatException) {

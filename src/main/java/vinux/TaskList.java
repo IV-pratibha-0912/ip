@@ -33,6 +33,7 @@ public class TaskList {
      * @param task The task to add
      */
     public void addTask(Task task) {
+        assert task != null : "Task to add should not be null";
         tasks.add(task);
     }
 
@@ -44,6 +45,8 @@ public class TaskList {
      * @throws IndexOutOfBoundsException if index is invalid
      */
     public Task deleteTask(int index) {
+        assert index >= 0 : "Index should not be negative: " + index;
+        assert index < tasks.size() : "Index should be within list size: " + index;
         return tasks.remove(index);
     }
 
@@ -55,6 +58,8 @@ public class TaskList {
      * @throws IndexOutOfBoundsException if index is invalid
      */
     public Task getTask(int index) {
+        assert index >= 0 : "Index should not be negative: " + index;
+        assert index < tasks.size() : "Index should be within list size: " + index;
         return tasks.get(index);
     }
 

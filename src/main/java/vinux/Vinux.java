@@ -21,6 +21,9 @@ public class Vinux {
      * @param filePath The path to the data file
      */
     public Vinux(String filePath) {
+        assert filePath != null : "File path should not be null";
+        assert !filePath.isEmpty() : "File path should not be empty";
+
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -29,6 +32,10 @@ public class Vinux {
             ui.showLoadingError(vinuxException.getMessage());
             tasks = new TaskList();
         }
+
+        assert tasks != null : "TaskList should be initialised after construction";
+        assert storage != null : "Storage should be initialised after construction";
+        assert ui != null : "Ui should be initialised after construction";
     }
 
     /**
@@ -266,6 +273,8 @@ public class Vinux {
      * @return The response string to display
      */
     public String getResponse(String input) {
+        assert input != null : "Input should not be null";
+
         try {
             String commandWord = Parser.getCommandWord(input);
             switch (commandWord) {
@@ -328,6 +337,7 @@ public class Vinux {
                     + " doesn't exist!\nYou only have " + tasks.getSize() + " task(s).");
         }
         tasks.getTask(index).markAsDone();
+        assert tasks.getTask(index).isDone() : "Task should be marked as done after markAsDone()";
         storage.saveTasks(tasks);
         return "Solid! This task is now done (FINALLY!):\n    [X] "
                 + tasks.getTask(index).getDescription();
@@ -340,6 +350,7 @@ public class Vinux {
                     + " doesn't exist!\nYou only have " + tasks.getSize() + " task(s).");
         }
         tasks.getTask(index).markAsNotDone();
+        assert !tasks.getTask(index).isDone() : "Task should not be done after markAsNotDone()";
         storage.saveTasks(tasks);
         return "Aw man! This task is still not done:\n    [ ] "
                 + tasks.getTask(index).getDescription();
@@ -407,6 +418,7 @@ public class Vinux {
         }
         int count = tasks.getSize();
         tasks.clearTasks();
+        assert tasks.getSize() == 0 : "Task list should be empty after clearing";
         storage.saveTasks(tasks);
         return "Consider it done! I've cleared all " + count
                 + " task(s) from your list.\nYour list is now empty. You're welcome.";
