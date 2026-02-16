@@ -1,3 +1,4 @@
+    Error loading file: Invalid date format: Friday
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               ________   __
@@ -15,178 +16,88 @@ Hello! I am your favourite assistant Vinux.
 I'm listening, unfortunately. Go on.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
-      [T][ ]read book
-    Now you have 31 task(s) in the list.
+Gotcha. I have now added this task:
+      [T][ ] read book
+Now you have 1 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
-      [T][ ]return book
-    Now you have 32 task(s) in the list.
+Gotcha. I have now added this task:
+      [T][ ] return book
+Now you have 2 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
+Gotcha. I have now added this task:
       [D][ ] submit assignment (by: Dec 31 2019)
-    Now you have 33 task(s) in the list.
+Now you have 3 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
+Gotcha. I have now added this task:
       [D][ ] return book (by: Dec 15 2025)
-    Now you have 34 task(s) in the list.
+Now you have 4 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
+Gotcha. I have now added this task:
       [D][ ] project report (by: Oct 15 2019)
-    Now you have 35 task(s) in the list.
+Now you have 5 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
+Gotcha. I have now added this task:
       [E][ ] project meeting (from: Mon 2pm to: 4pm)
-    Now you have 36 task(s) in the list.
+Now you have 6 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Gotcha. I have now added this task:
+Gotcha. I have now added this task:
       [E][ ] team lunch (from: 12pm to: 1pm)
-    Now you have 37 task(s) in the list.
+Now you have 7 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Why do you have so many things to do?
-    These are your tasks:
-    1.[T][ ]read book
-    2.[E][X] team lunch (from: 12pm to: 1pm)
-    3.[T][ ]read book
-    4.[T][ ]return book
-    5.[D][ ] submit assignment (by: Dec 31 2019)
-    6.[D][ ] return book (by: Dec 15 2025)
-    7.[D][ ] project report (by: Oct 15 2019)
-    8.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    9.[E][ ] team lunch (from: 12pm to: 1pm)
-    10.[T][ ]read book
-    11.[T][ ]return book
-    12.[D][ ] submit assignment (by: Dec 31 2019)
-    13.[D][ ] return book (by: Dec 15 2025)
-    14.[D][ ] project report (by: Oct 15 2019)
-    15.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    16.[E][ ] team lunch (from: 12pm to: 1pm)
-    17.[T][ ]read book
-    18.[T][ ]return book
-    19.[D][ ] submit assignment (by: Dec 31 2019)
-    20.[D][ ] return book (by: Dec 15 2025)
-    21.[D][ ] project report (by: Oct 15 2019)
-    22.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    23.[E][ ] team lunch (from: 12pm to: 1pm)
-    24.[T][ ]read book
-    25.[T][ ]return book
-    26.[D][ ] submit assignment (by: Dec 31 2019)
-    27.[D][ ] return book (by: Dec 15 2025)
-    28.[D][ ] project report (by: Oct 15 2019)
-    29.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    30.[E][ ] team lunch (from: 12pm to: 1pm)
-    31.[T][ ]read book
-    32.[T][ ]return book
-    33.[D][ ] submit assignment (by: Dec 31 2019)
-    34.[D][ ] return book (by: Dec 15 2025)
-    35.[D][ ] project report (by: Oct 15 2019)
-    36.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    37.[E][ ] team lunch (from: 12pm to: 1pm)
+Why do you have so many things to do?
+These are your tasks:
+    1.[T][ ] read book
+    2.[T][ ] return book
+    3.[D][ ] submit assignment (by: Dec 31 2019)
+    4.[D][ ] return book (by: Dec 15 2025)
+    5.[D][ ] project report (by: Oct 15 2019)
+    6.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+    7.[E][ ] team lunch (from: 12pm to: 1pm)
     ____________________________________________________________
     ____________________________________________________________
-    Solid! This task is now done (FINALLY!):
+Solid! This task is now done (FINALLY!):
         [X] read book
     ____________________________________________________________
     ____________________________________________________________
-    Solid! This task is now done (FINALLY!):
-        [X] read book
+Solid! This task is now done (FINALLY!):
+        [X] submit assignment
     ____________________________________________________________
     ____________________________________________________________
-    Why do you have so many things to do?
-    These are your tasks:
-    1.[T][X]read book
-    2.[E][X] team lunch (from: 12pm to: 1pm)
-    3.[T][X]read book
-    4.[T][ ]return book
-    5.[D][ ] submit assignment (by: Dec 31 2019)
-    6.[D][ ] return book (by: Dec 15 2025)
-    7.[D][ ] project report (by: Oct 15 2019)
-    8.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    9.[E][ ] team lunch (from: 12pm to: 1pm)
-    10.[T][ ]read book
-    11.[T][ ]return book
-    12.[D][ ] submit assignment (by: Dec 31 2019)
-    13.[D][ ] return book (by: Dec 15 2025)
-    14.[D][ ] project report (by: Oct 15 2019)
-    15.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    16.[E][ ] team lunch (from: 12pm to: 1pm)
-    17.[T][ ]read book
-    18.[T][ ]return book
-    19.[D][ ] submit assignment (by: Dec 31 2019)
-    20.[D][ ] return book (by: Dec 15 2025)
-    21.[D][ ] project report (by: Oct 15 2019)
-    22.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    23.[E][ ] team lunch (from: 12pm to: 1pm)
-    24.[T][ ]read book
-    25.[T][ ]return book
-    26.[D][ ] submit assignment (by: Dec 31 2019)
-    27.[D][ ] return book (by: Dec 15 2025)
-    28.[D][ ] project report (by: Oct 15 2019)
-    29.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    30.[E][ ] team lunch (from: 12pm to: 1pm)
-    31.[T][ ]read book
-    32.[T][ ]return book
-    33.[D][ ] submit assignment (by: Dec 31 2019)
-    34.[D][ ] return book (by: Dec 15 2025)
-    35.[D][ ] project report (by: Oct 15 2019)
-    36.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    37.[E][ ] team lunch (from: 12pm to: 1pm)
+Why do you have so many things to do?
+These are your tasks:
+    1.[T][X] read book
+    2.[T][ ] return book
+    3.[D][X] submit assignment (by: Dec 31 2019)
+    4.[D][ ] return book (by: Dec 15 2025)
+    5.[D][ ] project report (by: Oct 15 2019)
+    6.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+    7.[E][ ] team lunch (from: 12pm to: 1pm)
     ____________________________________________________________
     ____________________________________________________________
-    Aw man! This task is still not done:
+Aw man! This task is still not done:
         [ ] read book
     ____________________________________________________________
     ____________________________________________________________
-    You sure? I've removed this task:
-    [E][X] team lunch (from: 12pm to: 1pm)
-    Now you have 36 task(s) in the list.
+You sure? I've removed this task:
+    [T][ ] return book
+Now you have 6 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
-    Why do you have so many things to do?
-    These are your tasks:
-    1.[T][ ]read book
-    2.[T][X]read book
-    3.[T][ ]return book
-    4.[D][ ] submit assignment (by: Dec 31 2019)
-    5.[D][ ] return book (by: Dec 15 2025)
-    6.[D][ ] project report (by: Oct 15 2019)
-    7.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    8.[E][ ] team lunch (from: 12pm to: 1pm)
-    9.[T][ ]read book
-    10.[T][ ]return book
-    11.[D][ ] submit assignment (by: Dec 31 2019)
-    12.[D][ ] return book (by: Dec 15 2025)
-    13.[D][ ] project report (by: Oct 15 2019)
-    14.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    15.[E][ ] team lunch (from: 12pm to: 1pm)
-    16.[T][ ]read book
-    17.[T][ ]return book
-    18.[D][ ] submit assignment (by: Dec 31 2019)
-    19.[D][ ] return book (by: Dec 15 2025)
-    20.[D][ ] project report (by: Oct 15 2019)
-    21.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    22.[E][ ] team lunch (from: 12pm to: 1pm)
-    23.[T][ ]read book
-    24.[T][ ]return book
-    25.[D][ ] submit assignment (by: Dec 31 2019)
-    26.[D][ ] return book (by: Dec 15 2025)
-    27.[D][ ] project report (by: Oct 15 2019)
-    28.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    29.[E][ ] team lunch (from: 12pm to: 1pm)
-    30.[T][ ]read book
-    31.[T][ ]return book
-    32.[D][ ] submit assignment (by: Dec 31 2019)
-    33.[D][ ] return book (by: Dec 15 2025)
-    34.[D][ ] project report (by: Oct 15 2019)
-    35.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-    36.[E][ ] team lunch (from: 12pm to: 1pm)
+Why do you have so many things to do?
+These are your tasks:
+    1.[T][ ] read book
+    2.[D][X] submit assignment (by: Dec 31 2019)
+    3.[D][ ] return book (by: Dec 15 2025)
+    4.[D][ ] project report (by: Oct 15 2019)
+    5.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+    6.[E][ ] team lunch (from: 12pm to: 1pm)
     ____________________________________________________________
     ____________________________________________________________
     ____________________________________________________________
