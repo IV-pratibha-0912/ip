@@ -53,42 +53,42 @@ public class Vinux {
                 String commandWord = Parser.getCommandWord(fullCommand);
 
                 switch (commandWord) {
-                    case "bye":
-                        isExit = true;
-                        break;
-                    case "list":
-                        handleList();
-                        break;
-                    case "mark":
-                        handleMark(fullCommand);
-                        break;
-                    case "unmark":
-                        handleUnmark(fullCommand);
-                        break;
-                    case "delete":
-                        handleDelete(fullCommand);
-                        break;
-                    case "todo":
-                        handleTodo(fullCommand);
-                        break;
-                    case "deadline":
-                        handleDeadline(fullCommand);
-                        break;
-                    case "event":
-                        handleEvent(fullCommand);
-                        break;
-                    case "find":
-                        handleFind(fullCommand);
-                        break;
-                    case "cheer":
-                        handleCheer();
-                        break;
-                    case "clear":
-                        handleClear();
-                        break;
-                    default:
-                        ui.showError("OOPS!!! I'm sorry, but I don't know what that means...\n"
-                                + "Try: todo, deadline, event, list, mark, unmark, delete, or find");
+                case "bye":
+                    isExit = true;
+                    break;
+                case "list":
+                    handleList();
+                    break;
+                case "mark":
+                    handleMark(fullCommand);
+                    break;
+                case "unmark":
+                    handleUnmark(fullCommand);
+                    break;
+                case "delete":
+                    handleDelete(fullCommand);
+                    break;
+                case "todo":
+                    handleTodo(fullCommand);
+                    break;
+                case "deadline":
+                    handleDeadline(fullCommand);
+                    break;
+                case "event":
+                    handleEvent(fullCommand);
+                    break;
+                case "find":
+                    handleFind(fullCommand);
+                    break;
+                case "cheer":
+                    handleCheer();
+                    break;
+                case "clear":
+                    handleClear();
+                    break;
+                default:
+                    ui.showError("OOPS!!! I'm sorry, but I don't know what that means...\n"
+                            + "Try: todo, deadline, event, list, mark, unmark, delete, or find");
                 }
 
                 ui.showLine();
@@ -278,31 +278,31 @@ public class Vinux {
         try {
             String commandWord = Parser.getCommandWord(input);
             switch (commandWord) {
-                case "bye":
-                    return "Bye. Try not to miss me too much ;)";
-                case "list":
-                    return getListResponse();
-                case "mark":
-                    return getMarkResponse(input);
-                case "unmark":
-                    return getUnmarkResponse(input);
-                case "delete":
-                    return getDeleteResponse(input);
-                case "todo":
-                    return getTodoResponse(input);
-                case "deadline":
-                    return getDeadlineResponse(input);
-                case "event":
-                    return getEventResponse(input);
-                case "find":
-                    return getFindResponse(input);
-                case "cheer":
-                    return getCheerResponse();
-                case "clear":
-                    return getClearResponse();
-                default:
-                    return "ERROR: I'm sorry, but I don't know what that means...\n"
-                            + "Try: todo, deadline, event, list, mark, unmark, delete, or find";
+            case "bye":
+                return "Bye. Try not to miss me too much ;)";
+            case "list":
+                return getListResponse();
+            case "mark":
+                return getMarkResponse(input);
+            case "unmark":
+                return getUnmarkResponse(input);
+            case "delete":
+                return getDeleteResponse(input);
+            case "todo":
+                return getTodoResponse(input);
+            case "deadline":
+                return getDeadlineResponse(input);
+            case "event":
+                return getEventResponse(input);
+            case "find":
+                return getFindResponse(input);
+            case "cheer":
+                return getCheerResponse();
+            case "clear":
+                return getClearResponse();
+            default:
+                return "ERROR: I'm sorry, but I don't know what that means...\n"
+                        + "Try: todo, deadline, event, list, mark, unmark, delete, or find";
             }
         } catch (VinuxException vinuxException) {
             return "ERROR: " + vinuxException.getMessage();
