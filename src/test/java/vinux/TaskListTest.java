@@ -123,7 +123,7 @@ public class TaskListTest {
     @Test
     public void deleteTask_invalidIndex_throwsException() {
         taskList.addTask(new Todo("task"));
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(AssertionError.class, () -> {
             taskList.deleteTask(5);
         });
     }
@@ -134,7 +134,7 @@ public class TaskListTest {
      */
     @Test
     public void getTask_emptyList_throwsException() {
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(AssertionError.class, () -> {
             taskList.getTask(0);
         });
     }
@@ -146,7 +146,7 @@ public class TaskListTest {
     @Test
     public void getTask_negativeIndex_throwsException() {
         taskList.addTask(new Todo("task"));
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(AssertionError.class, () -> {
             taskList.getTask(-1);
         });
     }
