@@ -84,8 +84,16 @@ public class DialogBox extends HBox {
             applyErrorStyle(text.substring(6).trim());
         } else if (lower.startsWith("consider it done!")) {
             dialog.getStyleClass().add("clear-label");
-        } else if (lower.startsWith("here are the commands")) {
+        } else if (lower.contains("vinux command guide") || lower.startsWith("====")) {
             dialog.getStyleClass().add("help-label");
+        } else if (lower.startsWith("got it! added expense")) {
+            dialog.getStyleClass().add("expense-label");
+        } else if (lower.startsWith("here are your expenses")
+                || lower.startsWith("total spent on")
+                || lower.startsWith("alright, i've removed this expense")) {
+            dialog.getStyleClass().add("expense-label");
+        }  else if (lower.startsWith("expense summary")) {
+            dialog.getStyleClass().add("summary-label");
         }
     }
 

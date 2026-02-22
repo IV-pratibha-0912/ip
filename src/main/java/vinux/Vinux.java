@@ -14,29 +14,8 @@ public class Vinux {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    /**
-     * Constructs a Vinux chatbot with the specified file path for data storage.
-     *
-     * @param filePath The path to the data file
-     */
-    public Vinux(String filePath) {
-        assert filePath != null : "File path should not be null";
-        assert !filePath.isEmpty() : "File path should not be empty";
-
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.loadTasks());
-        } catch (VinuxException vinuxException) {
-            ui.showLoadingError(vinuxException.getMessage());
-            tasks = new TaskList();
-        }
-
-        assert tasks != null : "TaskList should be initialised after construction";
-        assert storage != null : "Storage should be initialised after construction";
-        assert ui != null : "Ui should be initialised after construction";
-    }
+    private ExpenseList expenses;
+    private ExpenseStorage expenseStorage;
 
     /**
      * Runs the main program loop.
@@ -302,6 +281,16 @@ public class Vinux {
                 return getClearResponse();
             case "help":
                 return getHelpResponse();
+            case "expense":
+                return getAddExpenseResponse(input);
+            case "expenses":
+                return getListExpensesResponse();
+            case "deleteexpense":
+                return getDeleteExpenseResponse(input);
+            case "total":
+                return getTotalByCategoryResponse(input);
+            case "summary":
+                return getSummaryResponse();
             default:
                 return "ERROR: I'm sorry, but I don't know what that means...\n"
                         + "Type 'help' to see all available commands!";
@@ -434,19 +423,153 @@ public class Vinux {
      * @return A formatted string containing all available commands
      */
     private String getHelpResponse() {
-        return "Here are the commands I understand:\n"
-                + "  todo <task>                          - Add a todo\n"
-                + "  deadline <task> /by <yyyy-MM-dd>     - Add a deadline\n"
-                + "  event <task> /from <start> /to <end> - Add an event\n"
-                + "  list                                 - List all tasks\n"
-                + "  mark <index>                         - Mark task done\n"
-                + "  unmark <index>                       - Unmark task\n"
-                + "  delete <index>                       - Delete task\n"
-                + "  find <keyword>                       - Search tasks\n"
-                + "  clear                                - Clear all tasks\n"
-                + "  cheer                                - Get motivation\n"
-                + "  help                                 - Show this list\n"
-                + "  bye                                  - Exit Vinux";
+        String s = "╔══════════════════════════════╗\n"
+                + "║                   VINUX COMMAND GUIDE            ║\n"
+                + "╚══════════════════════════════╝\n\n"
+                + "📋 TASKS:\n"
+                + "━━━━━━━━━━━━━━━━━━━━━\n"
+                + "  todo <task>\n"
+                + "    → Add a todo task\n\n"
+                + "  deadline <task> /by <yyyy-MM-dd>\n"
+                + "    → Add a deadline task\n\n"
+                + "  event <task> /from <start> /to <end>\n"
+                + "    → Add an event task\n\n"
+                + "  list\n"
+                + "    → List all tasks\n\n"
+                + "  mark <index>\n"
+                + "    → Mark task as done\n\n"
+                + "  unmark <index>\n"
+                + "    → Unmark task\n\n"
+                + "  delete <index>\n"
+                + "    → Delete a task\n\n"
+                + "  find <keyword>\n"
+                + "    → Search tasks\n\n"
+                + "  clear\n"
+                + "    → Clear all tasks\n\n"
+                + "💰 EXPENSES:\n"
+                + "━━━━━━━━━━━━━━━━━━━━━\n"
+                + "  expense <category> <desc> /amount <amt>\n"
+                + "    → Add an expense\n"
+                + "    → Example: expense food lunch /amount 12.50\n\n"
+                + "  expenses\n"
+                + "    → List all expenses\n\n"
+                + "  deleteexpense <index>\n"
+                + "    → Delete an expense\n\n"
+                + "  total <category>\n"
+                + "    → Show total for category\n\n"
+                + "  summary\n"
+                + "    → Show expense breakdown\n\n"
+                + "OTHERS:\n"
+                + "━━━━━━━━━━━━━━━━━━━━━\n"
+                + "  cheer\n"
+                + "    → Get motivation\n\n"
+                + "  help\n"
+                + "    → Show this guide\n\n"
+                + "  bye\n"
+                + "    → Exit Vinux\n\n"
+                + "━━━━━━━━━━━━━━━━━━━━━";
+        return s;
+    }
+
+    /**
+     * Handles adding an expense and returns a response message.
+     *
+     * @param input The full command string
+     * @return A confirmation message with expense details
+     * @throws VinuxException if parsing or saving fails
+     */
+    private String getAddExpenseResponse(String input) throws VinuxException {
+        vinux.expense.Expense expense = Parser.parseExpenseCommand(input);
+        expenses.addExpense(expense);
+        expenseStorage.saveExpenses(expenses);
+        return String.format("Got it! Added expense:\n  %s\nTotal expenses: %d",
+                expense, expenses.getSize());
+    }
+
+    /**
+     * Returns a list of all expenses.
+     *
+     * @return A formatted string showing all expenses
+     */
+    private String getListExpensesResponse() {
+        return expenses.listExpenses();
+    }
+
+    /**
+     * Handles deleting an expense and returns a response message.
+     *
+     * @param input The full command string
+     * @return A confirmation message with deleted expense details
+     * @throws VinuxException if parsing or saving fails
+     */
+    private String getDeleteExpenseResponse(String input) throws VinuxException {
+        int index = Parser.parseTaskIndex(input, 14); // "deleteexpense ".length()
+        if (index < 0 || index >= expenses.getSize()) {
+            throw new VinuxException("Sleepy, much? Expense number " + (index + 1)
+                    + " doesn't exist!\nYou only have " + expenses.getSize() + " expense(s).");
+        }
+        vinux.expense.Expense deleted = expenses.deleteExpense(index);
+        expenseStorage.saveExpenses(expenses);
+        return "Alright, I've removed this expense:\n  " + deleted
+                + "\nYou now have " + expenses.getSize() + " expense(s).";
+    }
+
+    /**
+     * Returns the total amount spent in a specific category.
+     *
+     * @param input The full command string
+     * @return A formatted string showing the category total
+     * @throws VinuxException if no category is provided
+     */
+    private String getTotalByCategoryResponse(String input) throws VinuxException {
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+            throw new VinuxException("Please specify a category!\nExample: total food");
+        }
+        return expenses.getTotalByCategory(parts[1].trim());
+    }
+
+    /**
+     * Returns a summary of expenses grouped by category.
+     *
+     * @return A formatted string showing spending breakdown
+     */
+    private String getSummaryResponse() {
+        return expenses.getCategorySummary();
+    }
+
+    /**
+     * Constructs a Vinux instance with the specified file path.
+     *
+     * @param filePath The path to the data file for storing tasks
+     */
+    public Vinux(String filePath) {
+        assert filePath != null : "File path should not be null";
+        assert !filePath.isEmpty() : "File path should not be empty";
+
+        ui = new Ui();
+        storage = new Storage(filePath);
+        expenseStorage = new ExpenseStorage();
+
+        try {
+            tasks = new TaskList(storage.loadTasks());
+        } catch (VinuxException vinuxException) {
+            ui.showLoadingError(vinuxException.getMessage());
+            tasks = new TaskList();
+        }
+
+        try {
+            expenses = new ExpenseList(expenseStorage.loadExpenses());
+        } catch (VinuxException vinuxException) {
+            ui.showLoadingError("Error loading expenses: " + vinuxException.getMessage());
+            expenses = new ExpenseList();
+        }
+
+        assert tasks != null : "TaskList should be initialised after construction";
+        assert expenses != null : "ExpenseList should be initialised after construction";
+        assert storage != null : "Storage should be initialised after construction";
+        assert expenseStorage != null : "ExpenseStorage should be initialised after construction";
+        assert ui != null : "Ui should be initialised after construction";
     }
 
     /**
