@@ -1,0 +1,4 @@
+food | nasi lemak | 5.5
+transport | grab | 8.0
+food | bubble tea | 6.5
+travel | tickets | 1300.0

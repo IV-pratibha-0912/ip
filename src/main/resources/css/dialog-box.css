@@ -84,3 +84,21 @@
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
 }
+
+.expense-label {
+    -fx-background-color: #fff3e0;
+    -fx-border-color: #ff6f00;
+    -fx-border-width: 1px;
+    -fx-text-fill: #e65100;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
+}
+
+.summary-label {
+    -fx-background-color: #f3e5f5;
+    -fx-border-color: #7b1fa2;
+    -fx-border-width: 1px;
+    -fx-text-fill: #4a148c;
+    -fx-background-radius: 1em 1em 0 1em;
+    -fx-border-radius: 1em 1em 0 1em;
+}

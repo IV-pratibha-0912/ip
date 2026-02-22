@@ -24,6 +24,9 @@ public class Parser {
     private static final int FROM_KEYWORD_LENGTH = 7;        // " /from "
     private static final int TO_KEYWORD_LENGTH = 5;          // " /to "
     private static final int BY_KEYWORD_LENGTH = 3;          // "/by"
+    private static final int EXPENSE_PREFIX_LENGTH = 8;     // "expense "
+    private static final int AMOUNT_KEYWORD_LENGTH = 9;     // " /amount "
+
     /**
      * Parses the user command and returns the command type.
      *
@@ -224,4 +227,72 @@ public class Parser {
         }
         return parts[1].trim();
     }
+
+    /**
+     * Parses an expense command and creates an Expense object.
+     * Format: expense <category> <description> /amount <amount>
+     *
+     * @param fullCommand The full command string
+     * @return A new Expense object
+     * @throws VinuxException if the command format is invalid
+     */
+    public static vinux.expense.Expense parseExpenseCommand(String fullCommand) throws VinuxException {
+        assert fullCommand != null : "Command should not be null";
+        assert fullCommand.startsWith("expense") : "Command should start with expense";
+
+        if (fullCommand.trim().equals("expense")
+                || fullCommand.substring(EXPENSE_PREFIX_LENGTH - 1).trim().isEmpty()) {
+            throw new VinuxException(
+                    "Format: expense <category> <description> /amount <amount>",
+                    "Example: expense food chicken rice /amount 4.50"
+            );
+        }
+
+        String details = fullCommand.substring(EXPENSE_PREFIX_LENGTH);
+        int amountIndex = details.indexOf(" /amount ");
+
+        if (amountIndex == -1) {
+            throw new VinuxException(
+                    "Missing /amount keyword!",
+                    "Format: expense <category> <description> /amount <amount>",
+                    "Example: expense food chicken rice /amount 4.50"
+            );
+        }
+
+        String beforeAmount = details.substring(0, amountIndex).trim();
+        String[] parts = beforeAmount.split(" ", 2);
+
+        if (parts.length < 2) {
+            throw new VinuxException(
+                    "Please provide both category and description!",
+                    "Format: expense <category> <description> /amount <amount>"
+            );
+        }
+
+        String category = parts[0];
+        String description = parts[1];
+        String amountString = details.substring(amountIndex + AMOUNT_KEYWORD_LENGTH).trim();
+
+        if (amountString.isEmpty()) {
+            throw new VinuxException("Please provide an amount!");
+        }
+
+        double amount;
+        try {
+            amount = Double.parseDouble(amountString);
+            if (amount < 0) {
+                throw new VinuxException("Amount cannot be negative!");
+            }
+        } catch (NumberFormatException e) {
+            throw new VinuxException(
+                    "Invalid amount: " + amountString,
+                    "Please provide a valid number like 4.50"
+            );
+        }
+
+        return new vinux.expense.Expense(description, amount, category);
+    }
 }
+
+
+

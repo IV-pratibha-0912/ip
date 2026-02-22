@@ -86,6 +86,14 @@ public class DialogBox extends HBox {
             dialog.getStyleClass().add("clear-label");
         } else if (lower.startsWith("here are the commands")) {
             dialog.getStyleClass().add("help-label");
+        } else if (lower.startsWith("got it! added expense")) {
+            dialog.getStyleClass().add("expense-label");
+        } else if (lower.startsWith("here are your expenses")
+                || lower.startsWith("total spent on")
+                || lower.startsWith("alright, i've removed this expense")) {
+            dialog.getStyleClass().add("expense-label");
+        }  else if (lower.startsWith("expense summary")) {
+            dialog.getStyleClass().add("summary-label");
         }
     }
 
