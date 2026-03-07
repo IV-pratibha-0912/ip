@@ -2,3 +2,6 @@ food | nasi lemak | 5.5
 transport | grab | 8.0
 food | bubble tea | 6.5
 travel | tickets | 1300.0
+food | lunch at cafe | 15.5
+transport | Grab to uni | 23.0
+books | Harry Potter | 28.0
