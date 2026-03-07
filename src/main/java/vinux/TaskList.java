@@ -151,4 +151,15 @@ public class TaskList {
                 + "  Events: " + eventCount + "\n"
                 + "  Completed: " + doneCount + "/" + tasks.size();
     }
+
+    /**
+     * Checks if a task with the same description already exists.
+     *
+     * @param newTask The task to check
+     * @return true if a duplicate exists, false otherwise
+     */
+    public boolean hasDuplicate(Task newTask) {
+        return tasks.stream()
+                .anyMatch(task -> task.getDescription().equalsIgnoreCase(newTask.getDescription()));
+    }
 }

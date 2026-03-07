@@ -363,25 +363,43 @@ public class Vinux {
 
     private String getTodoResponse(String input) throws VinuxException {
         Task task = Parser.parseTodoCommand(input);
+
+        String warning = "";
+        if (tasks.hasDuplicate(task)) {
+            warning = "⚠ Warning: You already have a similar task!\n\n";
+        }
+
         tasks.addTask(task);
         storage.saveTasks(tasks);
-        return "Gotcha. I have now added this task:\n  " + task
+        return warning + "Gotcha. I have now added this task:\n  " + task
                 + "\nNow you have " + tasks.getSize() + " task(s) in the list.";
     }
 
     private String getDeadlineResponse(String input) throws VinuxException {
         Task task = Parser.parseDeadlineCommand(input);
+
+        String warning = "";
+        if (tasks.hasDuplicate(task)) {
+            warning = "⚠ Warning: You already have a similar task!\n\n";
+        }
+
         tasks.addTask(task);
         storage.saveTasks(tasks);
-        return "Gotcha. I have now added this task:\n  " + task
+        return warning + "Gotcha. I have now added this task:\n  " + task
                 + "\nNow you have " + tasks.getSize() + " task(s) in the list.";
     }
 
     private String getEventResponse(String input) throws VinuxException {
         Task task = Parser.parseEventCommand(input);
+
+        String warning = "";
+        if (tasks.hasDuplicate(task)) {
+            warning = "⚠ Warning: You already have a similar task!\n\n";
+        }
+
         tasks.addTask(task);
         storage.saveTasks(tasks);
-        return "Gotcha. I have now added this task:\n  " + task
+        return warning + "Gotcha. I have now added this task:\n  " + task
                 + "\nNow you have " + tasks.getSize() + " task(s) in the list.";
     }
 
@@ -537,6 +555,7 @@ public class Vinux {
     private String getSummaryResponse() {
         return expenses.getCategorySummary();
     }
+
 
     /**
      * Constructs a Vinux instance with the specified file path.
