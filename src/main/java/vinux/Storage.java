@@ -3,6 +3,9 @@ package vinux;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -189,16 +192,21 @@ public class Storage {
     }
 
     /**
-     * Loads cheer quotes from the cheer.txt file.
+     * Loads cheer quotes from the cheer.txt file bundled in resources.
      *
      * @return List of cheer quotes
      * @throws VinuxException if the file cannot be read
      */
     public List<String> loadCheerQuotes() throws VinuxException {
         try {
-            return Files.readAllLines(Paths.get("./data/cheer.txt"));
-        } catch (IOException ioException) {
-            throw new VinuxException("Failed to load cheer quotes: " + ioException.getMessage());
+            InputStream is = getClass().getResourceAsStream("/data/cheer.txt");
+            if (is == null) {
+                throw new VinuxException("Cheer quotes file not found in resources");
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            return reader.lines().collect(java.util.stream.Collectors.toList());
+        } catch (Exception e) {
+            throw new VinuxException("Failed to load cheer quotes: " + e.getMessage());
         }
     }
 }
